@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="web89开启容器 代码审计  注意事项  如果字符串中包含非数字字符，intval 会尽可能地转换开头的数字部分。若开头不是数字，则返回 0。 对于浮点数，intval 会直接舍去小数部分，不进行四舍五入。 在处理不同进制的数值时，合理设置 base 参数可以实现正确的转换。  只要是num不为非数字开头即可  直接传入数组绕过即可 Warning: preg_match() expects p">
+<meta property="og:type" content="article">
+<meta property="og:title" content="web89-96">
+<meta property="og:url" content="https://youngking-gfy.github.io/2025/03/17/web89-96/index.html">
+<meta property="og:site_name" content="Youngking&#39;s Blog">
+<meta property="og:description" content="web89开启容器 代码审计  注意事项  如果字符串中包含非数字字符，intval 会尽可能地转换开头的数字部分。若开头不是数字，则返回 0。 对于浮点数，intval 会直接舍去小数部分，不进行四舍五入。 在处理不同进制的数值时，合理设置 base 参数可以实现正确的转换。  只要是num不为非数字开头即可  直接传入数组绕过即可 Warning: preg_match() expects p">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/17/web89-96/file-20250317123647072.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/17/web89-96/file-20250317124031597.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/17/web89-96/file-20250317124831184.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/17/web89-96/file-20250317125108726.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/17/web89-96/file-20250317125124179.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/17/web89-96/file-20250317125222780.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/17/web89-96/file-20250317130337608.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/17/web89-96/file-20250317130657331.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/17/web89-96/file-20250317131220445.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/17/web89-96/file-20250317131237047.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/17/web89-96/file-20250317131522955.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/17/web89-96/file-20250317131657922.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/17/web89-96/file-20250317132234331.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/17/web89-96/file-20250317132330924.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/17/web89-96/file-20250317132512861.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/17/web89-96/file-20250317132654007.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/17/web89-96/file-20250317132928557.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/17/web89-96/file-20250317133114144.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/17/web89-96/file-20250317133211830.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/17/web89-96/file-20250317133431128.png">
+<meta property="article:published_time" content="2025-03-17T04:36:08.000Z">
+<meta property="article:modified_time" content="2025-03-17T05:34:37.330Z">
+<meta property="article:author" content="Y0ungK1ng">
+<meta property="article:tag" content="php特性">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://youngking-gfy.github.io/2025/03/17/web89-96/file-20250317123647072.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>web89-96</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/categories/">categories</a></li><!--
+     --><!--
+       --><li><a href="/tags/">tags</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/youngking-gfy">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/03/14/web78-88/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://youngking-gfy.github.io/2025/03/17/web89-96/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://youngking-gfy.github.io/2025/03/17/web89-96/&text=web89-96"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://youngking-gfy.github.io/2025/03/17/web89-96/&title=web89-96"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://youngking-gfy.github.io/2025/03/17/web89-96/&is_video=false&description=web89-96"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=web89-96&body=Check out this article: https://youngking-gfy.github.io/2025/03/17/web89-96/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://youngking-gfy.github.io/2025/03/17/web89-96/&title=web89-96"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://youngking-gfy.github.io/2025/03/17/web89-96/&title=web89-96"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://youngking-gfy.github.io/2025/03/17/web89-96/&title=web89-96"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://youngking-gfy.github.io/2025/03/17/web89-96/&title=web89-96"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://youngking-gfy.github.io/2025/03/17/web89-96/&name=web89-96&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://youngking-gfy.github.io/2025/03/17/web89-96/&t=web89-96"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#web89"><span class="toc-number">1.</span> <span class="toc-text">web89</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web90"><span class="toc-number">2.</span> <span class="toc-text">web90</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web91"><span class="toc-number">3.</span> <span class="toc-text">web91</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%87%E6%BB%A4%E4%BF%A1%E6%81%AF"><span class="toc-number">3.1.</span> <span class="toc-text">过滤信息</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web92"><span class="toc-number">4.</span> <span class="toc-text">web92</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web93"><span class="toc-number">5.</span> <span class="toc-text">web93</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web94"><span class="toc-number">6.</span> <span class="toc-text">web94</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web95"><span class="toc-number">7.</span> <span class="toc-text">web95</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web96"><span class="toc-number">8.</span> <span class="toc-text">web96</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        web89-96
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Y0ungK1ng</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-03-17T04:36:08.000Z" class="dt-published" itemprop="datePublished">2025-03-17</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/%E6%B8%97%E9%80%8F%E5%AE%89%E5%85%A8/">渗透安全</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/php%E7%89%B9%E6%80%A7/" rel="tag">php特性</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h3 id="web89"><a href="#web89" class="headerlink" title="web89"></a>web89</h3><p>开启容器</p>
+<p>代码审计</p>
+<p><img src="/2025/03/17/web89-96/file-20250317123647072.png"></p>
+<p>注意事项</p>
+<ul>
+<li>如果字符串中包含非数字字符，<code>intval</code> 会尽可能地转换开头的数字部分。若开头不是数字，则返回 0。</li>
+<li>对于浮点数，<code>intval</code> 会直接舍去小数部分，不进行四舍五入。</li>
+<li>在处理不同进制的数值时，合理设置 <code>base</code> 参数可以实现正确的转换。</li>
+</ul>
+<p>只要是num不为非数字开头即可</p>
+<p><img src="/2025/03/17/web89-96/file-20250317124031597.png"></p>
+<p>直接传入数组绕过即可</p>
+<p><code>Warning: preg_match() expects parameter 2 to be string, array given in /var/www/html/index.php** on line 20</code></p>
+<p>可以绕过<code>preg_match()</code></p>
+<p>且</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$num</span>[] = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">intval</span>(<span class="variable">$num</span>);</span><br></pre></td></tr></table></figure>
+
+<p>结果为1</p>
+<h3 id="web90"><a href="#web90" class="headerlink" title="web90"></a>web90</h3><p>开启容器</p>
+<p><img src="/2025/03/17/web89-96/file-20250317124831184.png"></p>
+<p>代码审计</p>
+<p>这里可以运用<code>intval</code>的函数特性</p>
+<p><img src="/2025/03/17/web89-96/file-20250317125108726.png"></p>
+<p><img src="/2025/03/17/web89-96/file-20250317125124179.png"></p>
+<p>因此直接传入num为<code>4476a</code>即可</p>
+<p><img src="/2025/03/17/web89-96/file-20250317125222780.png"></p>
+<h3 id="web91"><a href="#web91" class="headerlink" title="web91"></a>web91</h3><p>开启容器</p>
+<p>代码审计</p>
+<h4 id="过滤信息"><a href="#过滤信息" class="headerlink" title="过滤信息"></a>过滤信息</h4><ul>
+<li>外层正则表达式 <code>/^php$/im</code> 的含义：<ul>
+<li><code>^</code>：表示字符串的开始。</li>
+<li><code>php</code>：要匹配的字符序列。</li>
+<li><code>$</code>：表示字符串的结束。</li>
+<li><code>i</code>：修饰符，表示不区分大小写。</li>
+<li><code>m</code>：修饰符，表示多行模式（<code>^</code> 和 <code>$</code> 匹配每一行的开始和结束，而不仅仅是整个字符串的开始和结束）</li>
+</ul>
+</li>
+<li>内层正则表达式 <code>/^php$/i</code> 的含义：<ul>
+<li><code>^</code>：表示字符串的开始。</li>
+<li><code>php</code>：要匹配的字符序列。</li>
+<li><code>$</code>：表示字符串的结束。</li>
+<li><code>i</code>：修饰符，表示不区分大小写。</li>
+</ul>
+</li>
+</ul>
+<p>首先要符合外层，同时不符合内层</p>
+<p><code>$a = &quot;\nphp&quot;;</code>：外层条件满足（某一行是 <code>php</code>），但内层条件不满足（多行字符串），因此不会输出 <code>&#39;hacker&#39;</code>。</p>
+<p><img src="/2025/03/17/web89-96/file-20250317130337608.png"></p>
+<p><code>/?cmd=%0aphp</code></p>
+<h3 id="web92"><a href="#web92" class="headerlink" title="web92"></a>web92</h3><p>开启容器</p>
+<p>代码审计</p>
+<p><img src="/2025/03/17/web89-96/file-20250317130657331.png"></p>
+<ol>
+<li><strong><code>intval($num, 0)</code></strong>：<ul>
+<li><code>intval</code> 函数将变量 <code>$num</code> 转换为整数。</li>
+<li>第二个参数 <code>0</code> 表示自动判断 <code>$num</code> 的数值类型（如十进制、十六进制等）。</li>
+</ul>
+</li>
+<li><strong>条件判断</strong>：<ul>
+<li>检查转换后的整数值是否等于 4476。</li>
+</ul>
+</li>
+<li><strong>输出结果</strong>：<ul>
+<li>如果条件满足，即 <code>$num</code> 转换为整数后等于 4476，则输出变量 <code>$flag</code> 的值。</li>
+</ul>
+</li>
+</ol>
+<p><code>/?num=0x117c</code></p>
+<p><img src="/2025/03/17/web89-96/file-20250317131220445.png"><br>传入十六进制即可</p>
+<p><code>/?num=4476e10</code></p>
+<p><img src="/2025/03/17/web89-96/file-20250317131237047.png"></p>
+<p>这里的4476e10与浮点数有关</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">var_dump(intval(&#x27;4476e123&#x27;,0));</span><br></pre></td></tr></table></figure>
+<p><img src="/2025/03/17/web89-96/file-20250317131522955.png"></p>
+<h3 id="web93"><a href="#web93" class="headerlink" title="web93"></a>web93</h3><p>开启容器</p>
+<p>代码审计</p>
+<p><img src="/2025/03/17/web89-96/file-20250317131657922.png"></p>
+<p>其实直接浮点数即可，intval函数可以得到flag</p>
+<p><img src="/2025/03/17/web89-96/file-20250317132234331.png"></p>
+<h3 id="web94"><a href="#web94" class="headerlink" title="web94"></a>web94</h3><p>开启容器</p>
+<p>代码审计</p>
+<p><img src="/2025/03/17/web89-96/file-20250317132330924.png"></p>
+<p>多了一个<code>strpos</code>函数</p>
+<p>这段 PHP 代码的作用是检查变量 <code>$num</code> 是否包含字符 “0”。如果不包含，则输出 “no no no!” 并终止脚本的执行。</p>
+<p>那其实可以给出<code>/?num=4476.01</code></p>
+<p><img src="/2025/03/17/web89-96/file-20250317132512861.png"></p>
+<h3 id="web95"><a href="#web95" class="headerlink" title="web95"></a>web95</h3><p>开启容器</p>
+<p>代码审计</p>
+<p><img src="/2025/03/17/web89-96/file-20250317132654007.png"></p>
+<p>这次过滤不能有<code>.</code></p>
+<p>可以用八进制绕过<br>&#x2F;?num&#x3D;+010574</p>
+<p><img src="/2025/03/17/web89-96/file-20250317132928557.png"></p>
+<p> <code>?num=+010574</code>或者<code>?num=%2b010574</code></p>
+<p><img src="/2025/03/17/web89-96/file-20250317133114144.png"></p>
+<h3 id="web96"><a href="#web96" class="headerlink" title="web96"></a>web96</h3><p>开启容器</p>
+<p>代码审计</p>
+<p><img src="/2025/03/17/web89-96/file-20250317133211830.png"></p>
+<p>开始试了下通配符</p>
+<p>其实也可以<code>./flag.php</code></p>
+<p>同样是在此路径下</p>
+<p><img src="/2025/03/17/web89-96/file-20250317133431128.png"></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a href="/categories/">categories</a></li>
+        
+          <li><a href="/tags/">tags</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/youngking-gfy">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#web89"><span class="toc-number">1.</span> <span class="toc-text">web89</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web90"><span class="toc-number">2.</span> <span class="toc-text">web90</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web91"><span class="toc-number">3.</span> <span class="toc-text">web91</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%87%E6%BB%A4%E4%BF%A1%E6%81%AF"><span class="toc-number">3.1.</span> <span class="toc-text">过滤信息</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web92"><span class="toc-number">4.</span> <span class="toc-text">web92</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web93"><span class="toc-number">5.</span> <span class="toc-text">web93</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web94"><span class="toc-number">6.</span> <span class="toc-text">web94</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web95"><span class="toc-number">7.</span> <span class="toc-text">web95</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web96"><span class="toc-number">8.</span> <span class="toc-text">web96</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://youngking-gfy.github.io/2025/03/17/web89-96/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://youngking-gfy.github.io/2025/03/17/web89-96/&text=web89-96"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://youngking-gfy.github.io/2025/03/17/web89-96/&title=web89-96"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://youngking-gfy.github.io/2025/03/17/web89-96/&is_video=false&description=web89-96"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=web89-96&body=Check out this article: https://youngking-gfy.github.io/2025/03/17/web89-96/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://youngking-gfy.github.io/2025/03/17/web89-96/&title=web89-96"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://youngking-gfy.github.io/2025/03/17/web89-96/&title=web89-96"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://youngking-gfy.github.io/2025/03/17/web89-96/&title=web89-96"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://youngking-gfy.github.io/2025/03/17/web89-96/&title=web89-96"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://youngking-gfy.github.io/2025/03/17/web89-96/&name=web89-96&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://youngking-gfy.github.io/2025/03/17/web89-96/&t=web89-96"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2025
+    Y0ungK1ng
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/categories/">categories</a></li><!--
+     --><!--
+       --><li><a href="/tags/">tags</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/youngking-gfy">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
