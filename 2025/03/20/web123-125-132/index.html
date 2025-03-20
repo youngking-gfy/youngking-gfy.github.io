@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="web123开启容器 代码审计  要求存在 post 传入 CTF_SHOW 和 CTF_SHOW.COM，不能存在 get 传入 fl0g。 CTF_SHOW&#x3D;&amp;CTF[SHOW.COM&#x3D;&amp;fun&#x3D;echo $flag 在给参数传值时，如果参数名中存在非法字符，比空格和点，则参数名中的点和空格等非法字符都会被替换成下划线。并且，在PHP8之前，如果参数中出现中括号 [ ，那么中括">
+<meta property="og:type" content="article">
+<meta property="og:title" content="web123&amp;125-132">
+<meta property="og:url" content="https://youngking-gfy.github.io/2025/03/20/web123-125-132/index.html">
+<meta property="og:site_name" content="Youngking&#39;s Blog">
+<meta property="og:description" content="web123开启容器 代码审计  要求存在 post 传入 CTF_SHOW 和 CTF_SHOW.COM，不能存在 get 传入 fl0g。 CTF_SHOW&#x3D;&amp;CTF[SHOW.COM&#x3D;&amp;fun&#x3D;echo $flag 在给参数传值时，如果参数名中存在非法字符，比空格和点，则参数名中的点和空格等非法字符都会被替换成下划线。并且，在PHP8之前，如果参数中出现中括号 [ ，那么中括">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/20/web123-125-132/file-20250320133522537.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/20/web123-125-132/file-20250320135307538.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/20/web123-125-132/file-20250320135249747.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/20/web123-125-132/file-20250320140124358.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/20/web123-125-132/file-20250320140618678.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/20/web123-125-132/file-20250320141006720.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/20/web123-125-132/file-20250320141755012.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/20/web123-125-132/file-20250320142546611.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/20/web123-125-132/file-20250320142615756.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/20/web123-125-132/file-20250320142805695.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/20/web123-125-132/file-20250320143128981.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/20/web123-125-132/file-20250320144548264.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/20/web123-125-132/file-20250320145036430.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/20/web123-125-132/file-20250320145528318.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/20/web123-125-132/file-20250320145838943.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/20/web123-125-132/file-20250320190406809.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/20/web123-125-132/file-20250320190843484.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/20/web123-125-132/file-20250320190919756.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/20/web123-125-132/file-20250320191204324.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/20/web123-125-132/file-20250320191229505.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/20/web123-125-132/file-20250320191737594.png">
+<meta property="article:published_time" content="2025-03-20T05:33:13.000Z">
+<meta property="article:modified_time" content="2025-03-20T11:17:58.141Z">
+<meta property="article:author" content="Y0ungK1ng">
+<meta property="article:tag" content="php特性">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://youngking-gfy.github.io/2025/03/20/web123-125-132/file-20250320133522537.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>web123&amp;125-132</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/categories/">categories</a></li><!--
+     --><!--
+       --><li><a href="/tags/">tags</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/youngking-gfy">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/03/20/web118-122-124/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://youngking-gfy.github.io/2025/03/20/web123-125-132/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://youngking-gfy.github.io/2025/03/20/web123-125-132/&text=web123&amp;125-132"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://youngking-gfy.github.io/2025/03/20/web123-125-132/&title=web123&amp;125-132"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://youngking-gfy.github.io/2025/03/20/web123-125-132/&is_video=false&description=web123&amp;125-132"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=web123&amp;125-132&body=Check out this article: https://youngking-gfy.github.io/2025/03/20/web123-125-132/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://youngking-gfy.github.io/2025/03/20/web123-125-132/&title=web123&amp;125-132"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://youngking-gfy.github.io/2025/03/20/web123-125-132/&title=web123&amp;125-132"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://youngking-gfy.github.io/2025/03/20/web123-125-132/&title=web123&amp;125-132"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://youngking-gfy.github.io/2025/03/20/web123-125-132/&title=web123&amp;125-132"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://youngking-gfy.github.io/2025/03/20/web123-125-132/&name=web123&amp;125-132&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://youngking-gfy.github.io/2025/03/20/web123-125-132/&t=web123&amp;125-132"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#web123"><span class="toc-number">1.</span> <span class="toc-text">web123</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web125"><span class="toc-number">2.</span> <span class="toc-text">web125</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web126"><span class="toc-number">3.</span> <span class="toc-text">web126</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web127"><span class="toc-number">4.</span> <span class="toc-text">web127</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web128"><span class="toc-number">5.</span> <span class="toc-text">web128</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web129"><span class="toc-number">6.</span> <span class="toc-text">web129</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web130"><span class="toc-number">7.</span> <span class="toc-text">web130</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web131"><span class="toc-number">8.</span> <span class="toc-text">web131</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web-132"><span class="toc-number">9.</span> <span class="toc-text">web 132</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        web123&amp;125-132
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Y0ungK1ng</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-03-20T05:33:13.000Z" class="dt-published" itemprop="datePublished">2025-03-20</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/%E6%B8%97%E9%80%8F%E5%AE%89%E5%85%A8/">渗透安全</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/php%E7%89%B9%E6%80%A7/" rel="tag">php特性</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h3 id="web123"><a href="#web123" class="headerlink" title="web123"></a>web123</h3><p>开启容器</p>
+<p>代码审计</p>
+<p><img src="/2025/03/20/web123-125-132/file-20250320133522537.png"></p>
+<p>要求存在 post 传入 CTF_SHOW 和 CTF_SHOW.COM，不能存在 <a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=get&spm=1001.2101.3001.7020">get</a> 传入 fl0g。</p>
+<p><code>CTF_SHOW=&amp;CTF[SHOW.COM=&amp;fun=echo $flag</code></p>
+<p>在给参数传值时，如果参数名中存在非法字符，比空格和点，则参数名中的点和空格等非法字符都会被替换成下划线。并且，在PHP8之前，如果参数中出现中括号 <code>[</code> ，那么中括号会被转换成下划线 <code>_</code> ，但是会出现转换错误，导致如果参数名后面还存在非法字符，则不会继续转换成下划线。也就是说，我们可以刻意拼接中括号制造这种错误，来保留后面的非法字符不被替换，因为中括号导致只会替换一次。</p>
+<p>确保传参符合条件后，由于没有过滤字母和空格，直接用 echo 输出 flag，后面会拼接好分号。</p>
+<p><img src="/2025/03/20/web123-125-132/file-20250320135307538.png"></p>
+<p><img src="/2025/03/20/web123-125-132/file-20250320135249747.png"></p>
+<p>上面是非预期解</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$a</span>=<span class="variable">$_SERVER</span>[<span class="string">&#x27;argv&#x27;</span>];</span><br></pre></td></tr></table></figure>
+
+<p>在 PHP 中，$_SERVER[‘argv’] 用于获取脚本的命令行参数，通常，这是在命令行模式下运行 PHP 脚本时使用的，而不是在网页模式下使用。</p>
+<p>当在命令行模式下运行 PHP 脚本时，例如： php script.php arg1 arg2</p>
+<p>那么 $_SERVER[‘argv’] 将包含以下内容：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$_SERVER</span>[<span class="string">&#x27;argv&#x27;</span>][<span class="number">0</span>] = <span class="string">&#x27;script.php&#x27;</span>;  <span class="comment">// 脚本名$_SERVER[&#x27;argv&#x27;][1] = &#x27;arg1&#x27;;       </span></span><br><span class="line"><span class="comment">// 第一个参数</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$_SERVER</span>[<span class="string">&#x27;argv&#x27;</span>][<span class="number">2</span>] = <span class="string">&#x27;arg2&#x27;</span>;       </span><br><span class="line"><span class="comment">// 第二个参数</span></span><br></pre></td></tr></table></figure>
+
+<p>payload：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">get：?<span class="variable">$fl0g</span>=flag_give_me;</span><br><span class="line">post：CTF_SHOW=&amp;CTF[SHOW.COM=&amp;fun=<span class="keyword">eval</span>(<span class="variable">$a</span>[<span class="number">0</span>])</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="/2025/03/20/web123-125-132/file-20250320140124358.png"></p>
+<p>得到flag</p>
+<h3 id="web125"><a href="#web125" class="headerlink" title="web125"></a>web125</h3><p>开启容器</p>
+<p>代码审计</p>
+<p><img src="/2025/03/20/web123-125-132/file-20250320140618678.png"></p>
+<p>payload</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">?1=flag.php</span><br><span class="line">post：CTF_SHOW=&amp;CTF[SHOW.COM=&amp;fun=highlight_file($_GET[1])</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/03/20/web123-125-132/file-20250320141006720.png"></p>
+<p>这里之所以再采用一个 1 来进行传参，应该是为了绕过正则里面对 flag 的过滤。</p>
+<p>还可以用<code>include</code> 结合伪协议读取，payload：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CTF_SHOW=&amp;CTF[SHOW.COM=&amp;fun=include($_POST[1])&amp;1=php://filter//convert.iconv.SJIS*.UCS-4*/resource=flag.php</span><br></pre></td></tr></table></figure>
+
+<h3 id="web126"><a href="#web126" class="headerlink" title="web126"></a>web126</h3><p>开启容器</p>
+<p>代码审计</p>
+<p><img src="/2025/03/20/web123-125-132/file-20250320141755012.png"></p>
+<p>新增过滤大小写字母：|g|i|f|c|o|d&#x2F;i</p>
+<p>伪协议也不好使了，使用 web123 中的 payload：</p>
+<p><code>get：?$fl0g=flag_give_me;</code><br><code>post：CTF_SHOW=&amp;CTF[SHOW.COM=&amp;fun=eval($a[0])</code></p>
+<p>post 传 assert 也是可以的：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CTF_SHOW=&amp;CTF[SHOW.COM=&amp;fun=<span class="title function_ invoke__">assert</span>(<span class="variable">$a</span>[<span class="number">0</span>])</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/03/20/web123-125-132/file-20250320142546611.png"></p>
+<p><img src="/2025/03/20/web123-125-132/file-20250320142615756.png"></p>
+<h3 id="web127"><a href="#web127" class="headerlink" title="web127"></a>web127</h3><p>开启容器</p>
+<p>代码审计</p>
+<p><img src="/2025/03/20/web123-125-132/file-20250320142805695.png"></p>
+<p>题中有extract，所以是要实现变量覆盖，令ctf_show&#x3D;ilove36d。<br>extract可以从数组中将变量导入到当前的符号表，本题限制了中括号，看一下输入字符串是否可行。</p>
+<p>本题测试一下，确认<code>?ctf_show=ilove36d</code>可以覆盖变量ctf_show。</p>
+<p>题目中下划线也被限制了，可以用空格绕过。</p>
+<p><img src="/2025/03/20/web123-125-132/file-20250320143128981.png"></p>
+<h3 id="web128"><a href="#web128" class="headerlink" title="web128"></a>web128</h3><p>开启容器</p>
+<p>代码审计</p>
+<p><img src="/2025/03/20/web123-125-132/file-20250320144548264.png"></p>
+<blockquote>
+<p>call_user_func 把第一个参数作为回调函数调用，其余参数是回调函数的参数。</p>
+</blockquote>
+<p>两个call_user_func，第一个函数可以有一个参数，返回的第二个函数是无参数函数。</p>
+<p><strong>get_defined_vars()</strong>：返回由所有已定义变量所组成的数组。<br>当前文件包含flag.php，直接打印<code>$flag</code>变量。</p>
+<p>本题又是一个新的知识点。<br><strong>gettext()</strong>：获取的文本框当前输入内容的方法，返回内容。<code>_()</code>是gettext()函数的简写形式，需要php扩展目录下有php_gettext.dll才能使用。</p>
+<p><img src="/2025/03/20/web123-125-132/file-20250320145036430.png"></p>
+<h3 id="web129"><a href="#web129" class="headerlink" title="web129"></a>web129</h3><p>开启容器</p>
+<p>代码审计</p>
+<p><img src="/2025/03/20/web123-125-132/file-20250320145528318.png"></p>
+<p>stripos 是 PHP 中的一个字符串函数，用于查找字符串在另一个字符串中首次出现的位置（不区分大小写）。</p>
+<p><img src="/2025/03/20/web123-125-132/file-20250320145838943.png"></p>
+<p>本地测试发现，如果不包含ctfshow，输出为空，可能无法执行命令，因此采用目录穿越<br><code>?f=/ctfshow/../../../var/www/html/flag.php</code></p>
+<p>得到flag</p>
+<h3 id="web130"><a href="#web130" class="headerlink" title="web130"></a>web130</h3><p>开启容器</p>
+<p>代码审计</p>
+<p><code>.+?</code> 是一个非贪婪的匹配，表示匹配尽可能少的字符。这里的 <code>.</code> 匹配任意字符（除了换行符），而 <code>+?</code> 是非贪婪的量词，表示匹配一次或多次，但尽可能少。这部分的作用是匹配从字符串开头到第一个出现的 <code>ctfshow</code> 之间的内容。</p>
+<p>也就是说输入的内容里，ctfshow前面不能有字符。</p>
+<p>第二个判断。stripos函数如果未发现字符串将返回 FALSE。<br>全等于的条件是必须双方的类型也一样，所以ctfshow在首位返回的0与FLASE不全等。</p>
+<p>所以<strong>payload-post</strong>：<code>f=ctfshow</code></p>
+<p><img src="/2025/03/20/web123-125-132/file-20250320190406809.png"></p>
+<h3 id="web131"><a href="#web131" class="headerlink" title="web131"></a>web131</h3><p>开启容器</p>
+<p>代码审计</p>
+<p>这道题既要求ctfshow不在首位就匹配，又要求有36Dctfshow，非常的矛盾，所以只能找办法突破规则。</p>
+<p>大概意思就是在php中正则表达式进行匹配有一定的限制，超过限制直接返回false</p>
+<p>利用RCE回溯</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> <span class="keyword">echo</span> <span class="title function_ invoke__">str_repeat</span>(<span class="string">&#x27;very&#x27;</span>, <span class="string">&#x27;250000&#x27;</span>).<span class="string">&#x27;36Dctfshow&#x27;</span>; <span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/03/20/web123-125-132/file-20250320190843484.png"></p>
+<p><img src="/2025/03/20/web123-125-132/file-20250320190919756.png"></p>
+<p><strong>非贪婪模式容易导致太多回溯。</strong><br>默认的backtrack_limit（最大回溯数）是100000，recursion_limit（最大嵌套数）是100000。<br>嵌套太多，可能会造成耗尽栈空间爆栈。</p>
+<h3 id="web-132"><a href="#web-132" class="headerlink" title="web 132"></a>web 132</h3><p>开启容器<br>是一个blog网站</p>
+<p><img src="/2025/03/20/web123-125-132/file-20250320191204324.png"></p>
+<p><img src="/2025/03/20/web123-125-132/file-20250320191229505.png"></p>
+<p>查看admin路由，查看到代码审计页面</p>
+<p>只需要<code>$username ===&quot;admin&quot;</code>和<code>$code == &#39;admin&#39;</code></p>
+<p><img src="/2025/03/20/web123-125-132/file-20250320191737594.png"></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a href="/categories/">categories</a></li>
+        
+          <li><a href="/tags/">tags</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/youngking-gfy">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#web123"><span class="toc-number">1.</span> <span class="toc-text">web123</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web125"><span class="toc-number">2.</span> <span class="toc-text">web125</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web126"><span class="toc-number">3.</span> <span class="toc-text">web126</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web127"><span class="toc-number">4.</span> <span class="toc-text">web127</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web128"><span class="toc-number">5.</span> <span class="toc-text">web128</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web129"><span class="toc-number">6.</span> <span class="toc-text">web129</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web130"><span class="toc-number">7.</span> <span class="toc-text">web130</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web131"><span class="toc-number">8.</span> <span class="toc-text">web131</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web-132"><span class="toc-number">9.</span> <span class="toc-text">web 132</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://youngking-gfy.github.io/2025/03/20/web123-125-132/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://youngking-gfy.github.io/2025/03/20/web123-125-132/&text=web123&amp;125-132"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://youngking-gfy.github.io/2025/03/20/web123-125-132/&title=web123&amp;125-132"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://youngking-gfy.github.io/2025/03/20/web123-125-132/&is_video=false&description=web123&amp;125-132"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=web123&amp;125-132&body=Check out this article: https://youngking-gfy.github.io/2025/03/20/web123-125-132/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://youngking-gfy.github.io/2025/03/20/web123-125-132/&title=web123&amp;125-132"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://youngking-gfy.github.io/2025/03/20/web123-125-132/&title=web123&amp;125-132"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://youngking-gfy.github.io/2025/03/20/web123-125-132/&title=web123&amp;125-132"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://youngking-gfy.github.io/2025/03/20/web123-125-132/&title=web123&amp;125-132"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://youngking-gfy.github.io/2025/03/20/web123-125-132/&name=web123&amp;125-132&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://youngking-gfy.github.io/2025/03/20/web123-125-132/&t=web123&amp;125-132"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2025
+    Y0ungK1ng
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/categories/">categories</a></li><!--
+     --><!--
+       --><li><a href="/tags/">tags</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/youngking-gfy">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
